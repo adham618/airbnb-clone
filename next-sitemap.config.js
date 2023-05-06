@@ -4,7 +4,7 @@
  */
 module.exports = {
   /** Without additional '/' on the end, e.g. https://google.com */
-  siteUrl: "https://adhamtarek.dev",
+  siteUrl: "https://airbnbclone-vert-eight.vercel.app",
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [{ userAgent: "*", allow: "/" }],
