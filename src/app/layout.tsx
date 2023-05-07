@@ -1,13 +1,12 @@
 import { Nunito } from "next/font/google";
 
-import "./globals.css";
+import "../styles/globals.css";
+
+import Footer from "@/components/Layout/Footer";
+import Header from "@/components/Layout/Header";
+import Seo from "@/components/Seo";
 
 const nunito = Nunito({ subsets: ["latin"] });
-
-export const metadata = {
-  title: "Airbnb",
-  description: "airbnb clone with nextjs and tailwindcss and typescript",
-};
 
 export default function RootLayout({
   children,
@@ -16,7 +15,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={nunito.className}>{children}</body>
+      <Seo />
+
+      <body className={nunito.className}>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
