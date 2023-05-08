@@ -4,11 +4,14 @@ import { useClickOutside } from "@mantine/hooks";
 import * as React from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 
+import useRegisterModal from "@/hooks/useRegisterModal";
+
 import Avater from "@/components/Avater";
 
 import MenuItem from "./MenuItem";
 
 export default function UserMenu() {
+  const registerModal = useRegisterModal();
   const [isOpen, setIsOpen] = React.useState(false);
   const toggleOpen = React.useCallback(() => setIsOpen((prev) => !prev), []);
   const ref = useClickOutside(() => setIsOpen(false));
@@ -41,10 +44,7 @@ export default function UserMenu() {
                 // onClick={ }
                 label="Login"
               />
-              <MenuItem
-                // onClick={ }
-                label="Sign up"
-              />
+              <MenuItem onClick={registerModal.onOpen} label="Sign up" />
             </>
           </div>
         </div>
