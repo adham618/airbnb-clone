@@ -9,7 +9,8 @@
     "lint": "next lint",
     "format": "prettier -w .",
     "format:check": "prettier -c .",
-    "postbuild": "next-sitemap --config next-sitemap.config.js"
+    "postbuild": "next-sitemap --config next-sitemap.config.js",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@mantine/hooks": "^6.0.10",
