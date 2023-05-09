@@ -71,7 +71,7 @@ export default function Modal({
   return (
     <div className="fixed inset-0 z-50 flex h-screen items-center justify-center bg-neutral-700/30">
       <div className="h-full w-full overflow-y-auto overflow-x-hidden py-6">
-        <div className="relative mx-auto w-full max-w-[95vw] md:h-auto md:w-4/6 lg:w-3/6 lg:max-w-3xl xl:w-2/5">
+        <div className="relative mx-auto w-[95vw] max-w-md md:h-auto lg:w-3/6 xl:w-2/5">
           {/* CONTENT */}
           <div
             className={`h-full transition duration-300 ${
