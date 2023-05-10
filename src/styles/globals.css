@@ -31,7 +31,7 @@
   }
   /* custom scrollbar  */
   ::-webkit-scrollbar {
-    @apply w-1 sm:w-2;
+    @apply h-1 w-1 sm:h-2 sm:w-2;
   }
 
   ::-webkit-scrollbar-track {

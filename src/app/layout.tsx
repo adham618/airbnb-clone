@@ -32,11 +32,11 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "adham-tarek",
+      name: "Adham Tarek",
       url: "https://adhamtarek.vercel.app",
     },
   ],
-  creator: "adham-tarek",
+  creator: "Adham Tarek",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },

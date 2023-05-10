@@ -5,6 +5,7 @@ import * as React from "react";
 import UserMenu from "@/components/Layout/Header/UserMenu";
 import Logo from "@/components/Logo";
 
+import Categories from "./Categories";
 import Search from "./Search";
 
 import { SafeUser } from "@/types";
@@ -22,6 +23,7 @@ export default function header({ currentUser }: HeaderProps) {
           <UserMenu currentUser={currentUser} />
         </div>
       </div>
+      <Categories />
     </header>
   );
 }
