@@ -10,7 +10,7 @@ type ButtonProps = {
   label: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
-  ouline?: boolean;
+  outline?: boolean;
   small?: boolean;
   icon?: IconType;
 } & React.ComponentPropsWithoutRef<"button">;
@@ -20,7 +20,7 @@ export default function Button({
   label,
   onClick,
   disabled = false,
-  ouline = false,
+  outline = false,
   small = false,
   icon: Icon,
   ...rest
@@ -30,9 +30,9 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={clsxm(
-        "relative w-full rounded-lg transition hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-70",
-        ouline
-          ? "border-black bg-white text-black"
+        "relative w-full rounded-lg transition hover:opacity-80 focus:scale-95 active:scale-95 disabled:cursor-not-allowed disabled:opacity-70",
+        outline
+          ? "border-black bg-white text-black hover:bg-neutral-100"
           : "border-rose-500 bg-rose-500 text-white",
         small
           ? "border px-2 py-1 text-sm font-light"

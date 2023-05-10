@@ -79,13 +79,13 @@ export default function LoginModal() {
       <Button
         onClick={() => signIn("google")}
         icon={FcGoogle}
-        ouline
+        outline
         label="Continue with Google"
       />
       <Button
         onClick={() => signIn("github")}
         icon={AiFillGithub}
-        ouline
+        outline
         label="Continue with Github"
       />
       <div className="flex items-center justify-center gap-2">

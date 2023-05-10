@@ -98,7 +98,7 @@ export default function Modal({
                 <div className="flex w-full items-center gap-4">
                   {secondaryAction && secondaryActionLabel && (
                     <Button
-                      ouline
+                      outline
                       disabled={disabled}
                       label={secondaryActionLabel}
                       onClick={handleSecondaryAction}
