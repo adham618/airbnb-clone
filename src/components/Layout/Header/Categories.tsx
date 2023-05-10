@@ -104,7 +104,7 @@ export default function Categories() {
   const isMainPage = pathname === "/";
   if (!isMainPage) return null;
   return (
-    <div className="layout flex items-center justify-center overflow-x-auto pt-4">
+    <div className="layout no-scrollbar flex items-center justify-center overflow-x-auto pt-4">
       {categories.map((item) => (
         <CategoryBox
           key={item.label}

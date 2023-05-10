@@ -45,4 +45,14 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-primary-hover;
   }
+  /* hide scrollbar */
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 }
