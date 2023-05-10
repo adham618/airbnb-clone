@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   applicationName: siteConfig.name,
   generator: `Next.js`,
+  viewport: "width=device-width, initial-scale=1.0",
   keywords: [
     "Next.js",
     "React",
@@ -40,6 +41,7 @@ export const metadata: Metadata = {
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
+  colorScheme: "light dark",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -74,8 +76,6 @@ export const metadata: Metadata = {
     "msapplication-TileImage": "/favicon/mstile-150x150.png",
     "msapplication-config": "/favicon/browserconfig.xml",
   },
-  colorScheme: "light dark",
-  viewport: "width=device-width, initial-scale=1.0",
   robots: "index, follow",
   // verification: {
   //   google: "1234567890",
