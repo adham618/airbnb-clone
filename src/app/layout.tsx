@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-  colorScheme: "light dark",
+  // colorScheme: "light dark",
   openGraph: {
     type: "website",
     locale: "en_US",
