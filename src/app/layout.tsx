@@ -7,6 +7,7 @@ import "../styles/globals.css";
 import Header from "@/components/Layout/Header";
 import LoginModal from "@/components/modals/LoginModal";
 import RegisterModal from "@/components/modals/RegisterModal";
+import RentModal from "@/components/modals/RentModal";
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import { siteConfig } from "@/config/site";
@@ -97,6 +98,7 @@ export default async function RootLayout({
         {/* <Footer /> */}
         <RegisterModal />
         <LoginModal />
+        <RentModal />
         <Toaster />
       </body>
     </html>
