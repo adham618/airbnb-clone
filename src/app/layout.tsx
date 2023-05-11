@@ -4,7 +4,6 @@ import { Toaster } from "react-hot-toast";
 
 import "../styles/globals.css";
 
-import Footer from "@/components/Layout/Footer";
 import Header from "@/components/Layout/Header";
 import LoginModal from "@/components/modals/LoginModal";
 import RegisterModal from "@/components/modals/RegisterModal";
@@ -41,7 +40,6 @@ export const metadata: Metadata = {
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-  // colorScheme: "light dark",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -95,7 +93,7 @@ export default async function RootLayout({
       <body className={nunito.className}>
         <Header currentUser={currentUser} />
         {children}
-        <Footer />
+        {/* <Footer /> */}
         <RegisterModal />
         <LoginModal />
         <Toaster />
