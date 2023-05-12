@@ -12,6 +12,7 @@ import Counter from "@/components/inputs/Counter";
 import CountrySelect, {
   CountrySelectValue,
 } from "@/components/inputs/CountrySelect";
+import ImageUpload from "@/components/inputs/ImageUpload";
 import { categories } from "@/components/Layout/Header/Categories";
 
 import Modal from "./Modal";
@@ -174,15 +175,40 @@ export default function RentModal() {
   }
 
   if (step === STEPS.IMAGES) {
-    bodyContent = <div className="flex flex-col gap-8">Images step!</div>;
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Upload some photos of your place"
+          subTitle="Showcase your place to guests"
+        />
+        <ImageUpload
+          value={image}
+          onChange={(value) => setCustomValue("image", value)}
+        />
+      </div>
+    );
   }
 
   if (step === STEPS.DESCRIPTION) {
-    bodyContent = <div className="flex flex-col gap-8">Description step!</div>;
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Describe your place to guests"
+          subTitle="Tell guests about your place"
+        />
+      </div>
+    );
   }
 
   if (step === STEPS.Price) {
-    bodyContent = <div className="flex flex-col gap-8">Price step!</div>;
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="How much do you want to charge?"
+          subTitle="Set a price"
+        />
+      </div>
+    );
   }
 
   return (
