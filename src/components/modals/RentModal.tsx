@@ -227,6 +227,16 @@ export default function RentModal() {
           title="How much do you want to charge?"
           subTitle="Set a price"
         />
+        <Input
+          id="price"
+          type="number"
+          label="Price"
+          register={register}
+          errors={errors}
+          disabled={isLoading}
+          formatPrice
+          required
+        />
       </div>
     );
   }
