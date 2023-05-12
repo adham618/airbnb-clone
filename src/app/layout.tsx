@@ -71,6 +71,8 @@ export const metadata: Metadata = {
   },
   manifest: `${siteConfig.url}/favicon/site.webmanifest`,
   other: {
+    icon: "/favicon/favicon-32x32.png",
+    "mask-icon": "/favicon/safari-pinned-tab.svg",
     "msapplication-TileColor": "#ffffff",
     "msapplication-TileImage": "/favicon/mstile-150x150.png",
     "msapplication-config": "/favicon/browserconfig.xml",
