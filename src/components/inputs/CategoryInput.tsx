@@ -10,6 +10,7 @@ type CategoryInputProps = {
   selected?: boolean;
   label: string;
   icon: IconType;
+  onClick: (value: string) => void;
 } & React.ComponentPropsWithoutRef<"button">;
 
 export default function CategoryInput({
@@ -17,10 +18,12 @@ export default function CategoryInput({
   selected,
   label,
   icon: Icon,
+  onClick,
   ...rest
 }: CategoryInputProps) {
   return (
     <button
+      onClick={() => onClick(label)}
       type="button"
       className={clsxm(
         "flex w-full flex-col gap-3 rounded-xl border-2 p-4 transition hover:border-black",
