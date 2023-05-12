@@ -13,6 +13,7 @@ import CountrySelect, {
   CountrySelectValue,
 } from "@/components/inputs/CountrySelect";
 import ImageUpload from "@/components/inputs/ImageUpload";
+import Input from "@/components/inputs/Input";
 import { categories } from "@/components/Layout/Header/Categories";
 
 import Modal from "./Modal";
@@ -29,7 +30,7 @@ enum STEPS {
 export default function RentModal() {
   const rentModal = useRentModal();
   const [step, setStep] = React.useState(STEPS.CATEGORY);
-
+  const [isLoading, setIsLoading] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -57,7 +58,6 @@ export default function RentModal() {
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
   const image = watch("image");
-  const price = watch("price");
 
   const Map = React.useMemo(
     () =>
@@ -196,6 +196,26 @@ export default function RentModal() {
           title="Describe your place to guests"
           subTitle="Tell guests about your place"
         />
+        <Input
+          id="title"
+          type="text"
+          label="Title"
+          register={register}
+          errors={errors}
+          disabled={isLoading}
+          required
+        />
+        <hr />
+        <Input
+          className="h-44"
+          id="description"
+          type="text"
+          label="Description"
+          register={register}
+          errors={errors}
+          disabled={isLoading}
+          required
+        />
       </div>
     );
   }
@@ -221,7 +241,7 @@ export default function RentModal() {
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : OnBack}
       body={bodyContent}
-      disabled={false}
+      disabled={isLoading}
     />
   );
 }
