@@ -8,6 +8,7 @@ import useRentModal from "@/hooks/useRentModal";
 
 import Heading from "@/components/Heading";
 import CategoryInput from "@/components/inputs/CategoryInput";
+import Counter from "@/components/inputs/Counter";
 import CountrySelect, {
   CountrySelectValue,
 } from "@/components/inputs/CountrySelect";
@@ -40,6 +41,7 @@ export default function RentModal() {
       category: "",
       location: null,
       questCount: 1,
+      roomCount: 1,
       bathroomCount: 1,
       image: "",
       price: 1,
@@ -50,6 +52,11 @@ export default function RentModal() {
 
   const category = watch("category");
   const location = watch("location");
+  const questCount = watch("questCount");
+  const roomCount = watch("roomCount");
+  const bathroomCount = watch("bathroomCount");
+  const image = watch("image");
+  const price = watch("price");
 
   const Map = React.useMemo(
     () =>
@@ -64,6 +71,7 @@ export default function RentModal() {
     id: string,
     value:
       | string
+      | number
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
       | CountrySelectValue
       | null
@@ -135,7 +143,34 @@ export default function RentModal() {
   }
 
   if (step === STEPS.INFO) {
-    bodyContent = <div className="flex flex-col gap-8">Info step!</div>;
+    bodyContent = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Share some details about your place"
+          subTitle="What amenities do you offer?"
+        />
+        <Counter
+          title="Guests"
+          subTitle="How many guests can your place accommodate?"
+          value={questCount}
+          onChange={(value) => setCustomValue("questCount", value)}
+        />
+        <hr />
+        <Counter
+          title="Rooms"
+          subTitle="How many  rooms can guests use?"
+          value={roomCount}
+          onChange={(value) => setCustomValue("roomCount", value)}
+        />
+        <hr />
+        <Counter
+          title="Bathrooms"
+          subTitle="How many bathrooms can guests use?"
+          value={bathroomCount}
+          onChange={(value) => setCustomValue("bathroomCount", value)}
+        />
+      </div>
+    );
   }
 
   if (step === STEPS.IMAGES) {
