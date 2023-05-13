@@ -62,14 +62,7 @@ export default function ListingsCard({
   }, [reservaion]);
 
   return (
-    <div
-      // onClick={() =>
-      //   router.push(
-      //     `/listings/${data.title.replace(/\s/g, "-").toLowerCase()}-${data.id}`
-      //   )
-      // }
-      className="group col-span-1 cursor-pointer"
-    >
+    <div className="group col-span-1">
       <div className="flex w-full flex-col gap-2">
         <div className="relative aspect-square w-full overflow-hidden rounded-xl">
           <Image
@@ -82,7 +75,16 @@ export default function ListingsCard({
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
         </div>
-        <div className="text-lg font-semibold">
+        <div
+          onClick={() =>
+            router.push(
+              `/listings/${data.title.replace(/\s/g, "-").toLowerCase()}-${
+                data.id
+              }`
+            )
+          }
+          className="text-lg font-semibold"
+        >
           {location?.region}, {location?.label}
         </div>
         <div className="font-light text-neutral-500">
