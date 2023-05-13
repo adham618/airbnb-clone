@@ -63,11 +63,11 @@ export default function ListingsCard({
 
   return (
     <div
-      onClick={() =>
-        router.push(
-          `/listings/${data.title.replace(/\s/g, "-").toLowerCase()}-${data.id}`
-        )
-      }
+      // onClick={() =>
+      //   router.push(
+      //     `/listings/${data.title.replace(/\s/g, "-").toLowerCase()}-${data.id}`
+      //   )
+      // }
       className="group col-span-1 cursor-pointer"
     >
       <div className="flex w-full flex-col gap-2">
