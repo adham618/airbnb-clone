@@ -9,6 +9,10 @@ type ImageUploadProps = {
   onChange: (value: string) => void;
 };
 
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let cloudinary: any;
+}
 export default function ImageUpload({ value, onChange }: ImageUploadProps) {
   const handleUpload = React.useCallback(
     (result: { info: { secure_url: string } }) => {
