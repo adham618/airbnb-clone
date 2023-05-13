@@ -21,8 +21,8 @@ export default function HeartButton({
     currentUser,
   });
   return (
-    <button
-      onClick={() => toggleFavorite}
+    <div
+      onClick={toggleFavorite}
       className="relative z-10 transition hover:opacity-80"
     >
       <AiOutlineHeart
@@ -33,6 +33,6 @@ export default function HeartButton({
         size="24"
         className={hasFavorite ? "fill-rose-500" : "fill-neutral-500/70"}
       />
-    </button>
+    </div>
   );
 }
