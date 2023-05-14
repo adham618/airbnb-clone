@@ -1,8 +1,13 @@
 import { prisma } from "@/lib/prismadb";
 
-export default async function getListingById(params: { listingId?: string }) {
+interface IParams {
+  listingId?: string;
+}
+
+export default async function getListingById(params: IParams) {
   try {
     const { listingId } = params;
+
     const listing = await prisma.listing.findUnique({
       where: {
         id: listingId,
@@ -11,22 +16,23 @@ export default async function getListingById(params: { listingId?: string }) {
         user: true,
       },
     });
+
     if (!listing) {
       return null;
     }
+
     return {
       ...listing,
-      createdAt: listing.created_at?.toISOString(),
+      createdAt: listing.createdAt.toString(),
       user: {
         ...listing.user,
-        createdAt: listing.user.createdAt?.toISOString(),
-        updatedAt: listing.user.updatedAt?.toISOString(),
-        emailVerified: listing.user.emailVerified?.toISOString() || null,
+        createdAt: listing.user.createdAt.toString(),
+        updatedAt: listing.user.updatedAt.toString(),
+        emailVerified: listing.user.emailVerified?.toString() || null,
       },
     };
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-    return null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    throw new Error(error);
   }
 }

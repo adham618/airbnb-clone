@@ -30,7 +30,7 @@ export default function ImageUpload({ value, onChange }: ImageUploadProps) {
           <button
             type="button"
             className="relative flex flex-col items-center justify-center gap-4 border-2 border-dashed border-neutral-300 p-20 text-neutral-600 transition hover:opacity-70"
-            onClick={() => open?.()}
+            onClick={() => open?.() ?? undefined}
           >
             <TbPhotoPlus size={50} />
             <span className="text-lg font-semibold">Upload a photo</span>

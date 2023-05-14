@@ -3,6 +3,7 @@ import ListingSection from "@/components/listings/ListingSection";
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import getListingById from "@/actions/getListingById";
+import getReservations from "@/actions/getReservations";
 
 export default async function Listings({
   params,
@@ -10,6 +11,7 @@ export default async function Listings({
   params: { listingId: string };
 }) {
   const listing = await getListingById(params);
+  const reservation = await getReservations(params);
   const currentUser = await getCurrentUser();
 
   if (!listing) {
@@ -18,7 +20,11 @@ export default async function Listings({
 
   return (
     <main className="min-h-screen">
-      <ListingSection listing={listing} currentUser={currentUser} />
+      <ListingSection
+        listing={listing}
+        reservation={reservation}
+        currentUser={currentUser}
+      />
     </main>
   );
 }

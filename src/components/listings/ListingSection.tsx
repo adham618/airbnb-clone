@@ -1,6 +1,5 @@
 "use client";
 
-import { Listing, Reservation } from "@prisma/client";
 import axios from "axios";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import { useRouter } from "next/navigation";
@@ -15,7 +14,7 @@ import ListingHead from "@/components/listings/ListingHead";
 import ListingInfo from "@/components/listings/ListingInfo";
 import ListingResvervation from "@/components/listings/ListingResvervation";
 
-import { SafeUser } from "@/types";
+import { SafeListing, SafeReservation, SafeUser } from "@/types";
 
 const initialDateRange = {
   startDate: new Date(),
@@ -24,8 +23,8 @@ const initialDateRange = {
 };
 
 type Props = {
-  reservation?: Reservation[];
-  listing: Listing & {
+  reservation?: SafeReservation[];
+  listing: SafeListing & {
     user: SafeUser;
   };
   currentUser?: SafeUser | null;
