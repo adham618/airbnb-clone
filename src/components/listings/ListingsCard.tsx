@@ -3,6 +3,7 @@
 import { Listing, Reservation } from "@prisma/client";
 import { format } from "date-fns";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import * as React from "react";
 
@@ -64,9 +65,11 @@ export default function ListingsCard({
   return (
     <div className="group col-span-1">
       <div className="flex w-full flex-col gap-2">
-        <div className="relative aspect-square w-full overflow-hidden rounded-xl">
+        <Link
+          href={`/listings/${data.id}`}
+          className="relative aspect-square w-full overflow-hidden rounded-xl"
+        >
           <Image
-            onClick={() => router.push(`/listings/${data.id}`)}
             className="h-full w-full cursor-pointer object-cover transition duration-300 group-hover:scale-110"
             src={data.image}
             fill
@@ -75,7 +78,7 @@ export default function ListingsCard({
           <div className="absolute right-2 top-2">
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
-        </div>
+        </Link>
         <div className="text-lg font-semibold">
           {location?.region}, {location?.label}
         </div>
