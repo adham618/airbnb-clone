@@ -23,7 +23,7 @@ export default function HeartButton({
   return (
     <div
       onClick={toggleFavorite}
-      className="relative transition hover:opacity-80"
+      className="relative cursor-pointer transition hover:opacity-80"
     >
       <AiOutlineHeart
         size={28}

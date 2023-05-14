@@ -15,7 +15,7 @@ type HeaderProps = {
 };
 export default function header({ currentUser }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-10  w-full  bg-white/90 shadow-sm backdrop-blur-lg">
+    <header className="sticky top-0 z-10  w-full  bg-white/95 shadow-sm backdrop-blur-lg">
       <div className="border-b py-4">
         <div className="layout flex items-center justify-between gap-3 md:gap-0">
           <Logo />

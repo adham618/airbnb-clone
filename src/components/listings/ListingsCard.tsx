@@ -66,7 +66,8 @@ export default function ListingsCard({
       <div className="flex w-full flex-col gap-2">
         <div className="relative aspect-square w-full overflow-hidden rounded-xl">
           <Image
-            className="h-full w-full object-cover transition duration-300 group-hover:scale-110"
+            onClick={() => router.push(`/listings/${data.id}`)}
+            className="h-full w-full cursor-pointer object-cover transition duration-300 group-hover:scale-110"
             src={data.image}
             fill
             alt={data.title}
@@ -75,16 +76,7 @@ export default function ListingsCard({
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
         </div>
-        <div
-          onClick={() =>
-            router.push(
-              `/listings/${data.title.replace(/\s/g, "-").toLowerCase()}-${
-                data.id
-              }`
-            )
-          }
-          className="text-lg font-semibold"
-        >
+        <div className="text-lg font-semibold">
           {location?.region}, {location?.label}
         </div>
         <div className="font-light text-neutral-500">
