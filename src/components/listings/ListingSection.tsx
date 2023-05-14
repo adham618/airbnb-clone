@@ -23,7 +23,7 @@ const initialDateRange = {
 };
 
 type Props = {
-  reservation?: SafeReservation[];
+  reservation?: SafeReservation[] | null;
   listing: SafeListing & {
     user: SafeUser;
   };
@@ -41,7 +41,7 @@ export default function ListingSection({
   const disabledDates = React.useMemo(() => {
     let dates: Date[] = [];
 
-    reservation.forEach((reservation) => {
+    reservation?.forEach((reservation) => {
       const range = eachDayOfInterval({
         start: new Date(reservation.startDate),
         end: new Date(reservation.endDate),
