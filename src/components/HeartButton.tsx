@@ -27,7 +27,7 @@ export default function HeartButton({
     >
       <AiOutlineHeart
         size={28}
-        className="absolute -right-[.7px] -top-[.8px] fill-white"
+        className="absolute -right-[1.2px] -top-[.8px] fill-white"
       />
       <AiFillHeart
         size="24"
