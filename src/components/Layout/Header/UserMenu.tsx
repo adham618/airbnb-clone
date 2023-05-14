@@ -1,6 +1,7 @@
 "use client";
 
 import { useClickOutside } from "@mantine/hooks";
+import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import * as React from "react";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -20,6 +21,8 @@ export default function UserMenu({
 }: {
   currentUser?: SafeUser | null;
 }) {
+  const router = useRouter();
+
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal();
@@ -60,14 +63,17 @@ export default function UserMenu({
             {currentUser ? (
               <>
                 <MenuItem onClick={loginModal.onOpen} label="My Trips" />
-                <MenuItem onClick={registerModal.onOpen} label="My Favorites" />
                 <MenuItem
-                  // onClick={registerModal.onOpen}
+                  onClick={() => router.push("/favorites")}
+                  label="My Favorites"
+                />
+                <MenuItem
+                  onClick={() => router.push("/reservations")}
                   label="My Reservations"
                 />
                 <MenuItem
-                  // onClick={registerModal.onOpen}
-                  label="My properties"
+                  onClick={() => router.push("/properties")}
+                  label="My Properties"
                 />
                 <MenuItem onClick={rentModal.onOpen} label="Airbnb my home" />
                 <hr />
