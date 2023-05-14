@@ -39,7 +39,7 @@ export default function ListingResvervation({
       />
       <hr />
       <div className="p-4">
-        <Button label="Reserve" onClick={onSubmit} disabled={disabled} />
+        <Button label="Reserve now" onClick={onSubmit} disabled={disabled} />
       </div>
       <div className="flex items-center justify-between p-4 text-lg font-semibold">
         <div>Total</div>
