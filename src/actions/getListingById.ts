@@ -24,8 +24,9 @@ export default async function getListingById(params: { listingId?: string }) {
         emailVerified: listing.user.emailVerified?.toISOString() || null,
       },
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    throw new Error(error);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(error);
+    return null;
   }
 }
