@@ -71,3 +71,15 @@
   font-size: 16px !important;
   width: 100% !important;
 }
+.rdrNextButton i {
+  margin: 0 !important;
+}
+.rdrNextPrevButton {
+  padding: 6px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: unset !important;
+  height: unset !important;
+  margin: 6px !important;
+}
