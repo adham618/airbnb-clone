@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { FiHeart } from "react-icons/fi";
 
 import useFavorite from "@/hooks/useFavorite";
 
@@ -23,15 +23,13 @@ export default function HeartButton({
   return (
     <div
       onClick={toggleFavorite}
-      className="relative cursor-pointer transition hover:opacity-80"
+      className="cursor-pointer transition hover:opacity-80"
     >
-      <AiOutlineHeart
+      <FiHeart
         size={28}
-        className="absolute -right-[1.2px] -top-[.8px] fill-white"
-      />
-      <AiFillHeart
-        size="24"
-        className={hasFavorite ? "fill-rose-500" : "fill-neutral-500/70"}
+        className={`stroke-white ${
+          hasFavorite ? "fill-rose-500" : "fill-neutral-500/70"
+        }`}
       />
     </div>
   );
