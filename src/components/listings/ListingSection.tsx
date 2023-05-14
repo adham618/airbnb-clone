@@ -86,10 +86,8 @@ export default function ListingSection({
 
   React.useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {
-      const dayCount = differenceInCalendarDays(
-        dateRange.endDate,
-        dateRange.startDate
-      );
+      const dayCount =
+        differenceInCalendarDays(dateRange.endDate, dateRange.startDate) + 1;
       if (dayCount && listing.price) {
         setTotalPrice(dayCount * listing.price);
       } else {
