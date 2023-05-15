@@ -6,7 +6,7 @@ import getReservations from "@/actions/getReservations";
 import ReservationsSection from "./ReservationsSection";
 
 export const metadata = {
-  title: "Reservations",
+  title: "My Reservations",
   description: "Bookings on your properties",
 };
 

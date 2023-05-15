@@ -10,7 +10,7 @@ import ListingsCard from "@/components/listings/ListingsCard";
 
 import { SafeReservation, SafeUser } from "@/types";
 
-type TripsSectionProps = {
+type ReservationsSectionProps = {
   reservations: SafeReservation[];
   currentUser?: SafeUser | null;
 };
@@ -18,7 +18,7 @@ type TripsSectionProps = {
 export default function ReservationsSection({
   reservations,
   currentUser,
-}: TripsSectionProps) {
+}: ReservationsSectionProps) {
   const router = useRouter();
   const [deletingId, setDeletingId] = React.useState("");
 

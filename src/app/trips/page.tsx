@@ -6,7 +6,7 @@ import getReservations from "@/actions/getReservations";
 import TripsSection from "./TripsSection";
 
 export const metadata = {
-  title: "Trips",
+  title: "My Trips",
   description:
     "Manage your upcoming trips, including message threads with hosts.",
 };

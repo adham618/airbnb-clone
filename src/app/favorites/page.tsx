@@ -1,13 +1,40 @@
+import EmptyState from "@/components/EmptyState";
+
+import getCurrentUser from "@/actions/getCurrentUser";
+import getFavoriteListings from "@/actions/getFavoriteListings";
+
+import FavoritesSection from "./FavoritesSection";
+
 export const metadata = {
-  title: "Favorites",
+  title: "My Favorites",
+  description: "Manage your favorite listings.",
 };
 
 export default async function Favorites() {
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    return (
+      <EmptyState
+        title="Unauthorized"
+        subTitle="You must be signed in to view this page."
+      />
+    );
+  }
+
+  const listings = await getFavoriteListings();
+
+  if (listings.length === 0) {
+    return (
+      <EmptyState
+        title="No Favorites"
+        subTitle="You haven't favorited any listings yet."
+      />
+    );
+  }
   return (
     <main className="min-h-screen">
-      <section>
-        <div className="layout grid grid-cols-1 gap-8 py-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"></div>
-      </section>
+      <FavoritesSection listings={listings} currentUser={currentUser} />
     </main>
   );
 }
