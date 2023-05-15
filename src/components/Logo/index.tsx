@@ -13,7 +13,7 @@ type indexProps = {
 
 export default function index({ className }: indexProps) {
   return (
-    <Link href="/">
+    <Link href="/" aria-label="logo">
       <Logo className={clsxm("hidden md:block", className)} />
     </Link>
   );

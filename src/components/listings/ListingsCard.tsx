@@ -65,6 +65,7 @@ export default function ListingsCard({
         <Link
           href={`/listings/${data.id}`}
           className="relative aspect-square w-full overflow-hidden rounded-xl"
+          aria-label="View Listing"
         >
           <Image
             className="h-full w-full cursor-pointer object-cover transition duration-300 group-hover:scale-110"
