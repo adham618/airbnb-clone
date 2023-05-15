@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "Trips",
+};
+
 export default async function Trips() {
   return (
     <>

@@ -1,4 +1,8 @@
-export default async function Reservations() {
+export const metadata = {
+  title: "Favorites",
+};
+
+export default async function Favorites() {
   return (
     <>
       <main className="min-h-screen">

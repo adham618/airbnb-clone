@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "Properties",
+};
+
 export default async function Properties() {
   return (
     <>
