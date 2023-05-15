@@ -62,7 +62,9 @@ export default function UserMenu({
           <div className="flex cursor-pointer flex-col">
             {currentUser ? (
               <>
-                <MenuItem onClick={loginModal.onOpen} label="My Trips" />
+                <MenuItem onClick={
+                  () => router.push("/trips")
+                } label="My Trips" />
                 <MenuItem
                   onClick={() => router.push("/favorites")}
                   label="My Favorites"
