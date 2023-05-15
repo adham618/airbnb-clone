@@ -6,6 +6,7 @@ import ListingSection from "@/components/listings/ListingSection";
 import getCurrentUser from "@/actions/getCurrentUser";
 import getListingById from "@/actions/getListingById";
 import getReservations from "@/actions/getReservations";
+import { siteConfig } from "@/config/site";
 
 type Params = {
   params: { listingId: string };
@@ -21,6 +22,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     openGraph: {
       title: listing?.title,
       description: listing?.description,
+      url: `${siteConfig.url}/listings/${listing?.id}`,
+      siteName: siteConfig.name,
       images: [
         {
           url: listing?.image || "",
