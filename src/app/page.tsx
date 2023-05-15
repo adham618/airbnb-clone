@@ -4,13 +4,8 @@ import ListingsCard from "@/components/listings/ListingsCard";
 import getCurrentUser from "@/actions/getCurrentUser";
 import getListings from "@/actions/getListings";
 
-interface HomeProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  searchParams: any;
-}
-
-export default async function Home({ searchParams }: HomeProps) {
-  const listings = await getListings(searchParams);
+export default async function Home() {
+  const listings = await getListings();
   const currentUser = await getCurrentUser();
 
   if (listings.length === 0) {
