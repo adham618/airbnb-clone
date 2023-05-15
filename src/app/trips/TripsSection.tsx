@@ -42,7 +42,7 @@ export default function TripsSection({
     },
     [router]
   );
-  console.log(currentUser);
+
   return (
     <section>
       <div className="layout py-8">
