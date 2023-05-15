@@ -7,6 +7,7 @@ import getCurrentUser from "@/actions/getCurrentUser";
 type IParams = {
   listingId?: string;
 };
+export const dynamic = "force-dynamic";
 
 export async function DELETE(
   request: Request,
