@@ -1,13 +1,43 @@
+import EmptyState from "@/components/EmptyState";
+
+import getCurrentUser from "@/actions/getCurrentUser";
+import getReservations from "@/actions/getReservations";
+
+import ReservationsSection from "./ReservationsSection";
+
 export const metadata = {
   title: "Reservations",
+  description: "Bookings on your properties",
 };
 
 export default async function Reservations() {
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    return (
+      <EmptyState
+        title="Unauthorized"
+        subTitle="You must be signed in to view this page."
+      />
+    );
+  }
+
+  const reservations = await getReservations({ authorId: currentUser.id });
+
+  if (reservations?.length === 0 || reservations === undefined) {
+    return (
+      <EmptyState
+        title="No Reservations"
+        subTitle="You haven't booked any reservations yet."
+      />
+    );
+  }
   return (
     <main className="min-h-screen">
-      <section>
-        <div className="layout grid grid-cols-1 gap-8 py-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"></div>
-      </section>
+      <ReservationsSection
+        reservations={reservations}
+        currentUser={currentUser}
+      />
     </main>
   );
 }

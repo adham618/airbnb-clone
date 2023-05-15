@@ -23,9 +23,9 @@ export default async function Trips() {
     );
   }
 
-  const reservations = await getReservations({ authorId: currentUser.id });
+  const reservations = await getReservations({ userId: currentUser.id });
 
-  if (reservations.length === 0) {
+  if (reservations?.length === 0 || reservations === undefined) {
     return (
       <EmptyState
         title="No Trips"
