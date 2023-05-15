@@ -1,29 +1,28 @@
 import { prisma } from "@/lib/prismadb";
 
-type IParams = {
+interface IParams {
   listingId?: string;
   userId?: string;
   authorId?: string;
-};
+}
 
 export default async function getReservations(params: IParams) {
   try {
-    const { authorId, userId, listingId } = params;
+    const { listingId, userId, authorId } = params;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const query: any = {};
 
-    if (authorId) {
-      query.listing = {
-        userId: authorId,
-      };
+    if (listingId) {
+      query.listingId = listingId;
     }
 
     if (userId) {
       query.userId = userId;
     }
 
-    if (listingId) {
-      query.listingId = listingId;
+    if (authorId) {
+      query.listing = { userId: authorId };
     }
 
     const reservations = await prisma.reservation.findMany({
@@ -35,7 +34,8 @@ export default async function getReservations(params: IParams) {
         createdAt: "desc",
       },
     });
-    const SafeReservations = reservations.map((reservation) => ({
+
+    const safeReservations = reservations.map((reservation) => ({
       ...reservation,
       createdAt: reservation.createdAt.toISOString(),
       startDate: reservation.startDate.toISOString(),
@@ -45,7 +45,8 @@ export default async function getReservations(params: IParams) {
         createdAt: reservation.listing.createdAt.toISOString(),
       },
     }));
-    return SafeReservations;
+
+    return safeReservations;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // eslint-disable-next-line no-console

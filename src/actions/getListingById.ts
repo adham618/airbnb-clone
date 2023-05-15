@@ -32,9 +32,7 @@ export default async function getListingById(params: IParams) {
       },
     };
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    // eslint-disable-next-line no-console
-    console.error(err);
-    return null;
+  } catch (error: any) {
+    throw new Error(error);
   }
 }

@@ -28,12 +28,12 @@ export default async function getCurrentUser() {
 
     return {
       ...currentUser,
-      createdAt: currentUser.createdAt?.toISOString(),
-      updatedAt: currentUser.updatedAt?.toISOString(),
+      createdAt: currentUser.createdAt.toISOString(),
+      updatedAt: currentUser.updatedAt.toISOString(),
       emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    return null;
   }
 }
