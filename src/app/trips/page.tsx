@@ -28,7 +28,7 @@ export default async function Trips() {
   if (reservations?.length === 0 || reservations === undefined) {
     return (
       <EmptyState
-        title="No Trips"
+        title="No Trips Found"
         subTitle="You haven't booked any trips yet."
       />
     );

@@ -27,7 +27,7 @@ export default async function Favorites() {
   if (listings.length === 0) {
     return (
       <EmptyState
-        title="No Favorites"
+        title="No Favorites Found"
         subTitle="You haven't favorited any listings yet."
       />
     );

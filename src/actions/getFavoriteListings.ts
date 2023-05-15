@@ -22,6 +22,7 @@ export default async function getFavoriteListings() {
       createdAt: favorite.createdAt.toString(),
     }));
     return safeFavorites;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw new Error(error);
   }
