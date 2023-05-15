@@ -1,15 +1,41 @@
+import EmptyState from "@/components/EmptyState";
+
+import getCurrentUser from "@/actions/getCurrentUser";
+import getReservations from "@/actions/getReservations";
+
+import TripsSection from "./TripsSection";
+
 export const metadata = {
   title: "Trips",
+  description:
+    "Manage your upcoming trips, including message threads with hosts.",
 };
 
 export default async function Trips() {
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    return (
+      <EmptyState
+        title="Unauthorized"
+        subTitle="You must be signed in to view this page."
+      />
+    );
+  }
+
+  const reservations = await getReservations({ authorId: currentUser.id });
+
+  if (reservations.length === 0) {
+    return (
+      <EmptyState
+        title="No Trips"
+        subTitle="You haven't booked any trips yet."
+      />
+    );
+  }
   return (
-    <>
-      <main className="min-h-screen">
-        <section>
-          <div className="layout grid grid-cols-1 gap-8 py-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"></div>
-        </section>
-      </main>
-    </>
+    <main className="min-h-screen">
+      <TripsSection reservations={reservations} currentUser={currentUser} />
+    </main>
   );
 }

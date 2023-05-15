@@ -48,8 +48,6 @@ export default async function getReservations(params: IParams) {
     return SafeReservations;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    // eslint-disable-next-line no-console
-    console.error(error);
-    return null;
+    throw new Error(error);
   }
 }

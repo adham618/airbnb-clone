@@ -1,10 +1,8 @@
 "use client";
 
-import { Listing, Reservation } from "@prisma/client";
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import * as React from "react";
 
 import useCountries from "@/hooks/useCountries";
@@ -12,12 +10,12 @@ import useCountries from "@/hooks/useCountries";
 import Button from "@/components/Button";
 import HeartButton from "@/components/HeartButton";
 
-import { SafeUser } from "@/types";
+import { SafeListing, SafeReservation, SafeUser } from "@/types";
 
 type Props = {
-  currentUser: SafeUser | null;
-  data: Listing;
-  reservaion?: Reservation;
+  currentUser: SafeUser | null | undefined;
+  data: SafeListing;
+  reservaion?: SafeReservation;
   onAction?: (id: string) => void;
   disabled?: boolean;
   actionLabel?: string;
@@ -32,7 +30,6 @@ export default function ListingsCard({
   actionLabel,
   actionId = "",
 }: Props) {
-  const router = useRouter();
   const { getByValue } = useCountries();
 
   const location = getByValue(data.location);

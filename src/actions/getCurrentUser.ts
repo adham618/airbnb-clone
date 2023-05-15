@@ -33,6 +33,7 @@ export default async function getCurrentUser() {
       emailVerified: currentUser.emailVerified?.toISOString() || null,
     };
   } catch (error) {
-    return null;
+    // eslint-disable-next-line no-console
+    console.log(error);
   }
 }

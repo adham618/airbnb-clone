@@ -1,12 +1,13 @@
 import { Metadata } from "next";
 
 import EmptyState from "@/components/EmptyState";
-import ListingSection from "@/components/listings/ListingSection";
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import getListingById from "@/actions/getListingById";
 import getReservations from "@/actions/getReservations";
 import { siteConfig } from "@/config/site";
+
+import ListingSection from "./ListingSection";
 
 type Params = {
   params: { listingId: string };
