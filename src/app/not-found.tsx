@@ -3,8 +3,8 @@ import EmptyState from "@/components/EmptyState";
 export default function NotFound() {
   return (
     <EmptyState
-      title="not found"
-      subTitle="Something went wrong. Please try again later."
+      title="Page Not Found"
+      subTitle="Sorry, this page does not exist."
       showReset
       resetLabel="Go Home"
     />
