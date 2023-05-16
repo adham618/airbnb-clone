@@ -35,6 +35,7 @@
     "next": "13.4.1",
     "next-auth": "^4.22.1",
     "next-cloudinary": "^4.10.0",
+    "next-nprogress-bar": "^1.2.1",
     "next-seo": "^6.0.0",
     "next-sitemap": "^4.0.9",
     "postcss": "8.4.23",

@@ -9,6 +9,7 @@ import LoginModal from "@/components/modals/LoginModal";
 import RegisterModal from "@/components/modals/RegisterModal";
 import RentModal from "@/components/modals/RentModal";
 import SearchModal from "@/components/modals/SearchModal";
+import NProgress from "@/components/NProgress";
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import { siteConfig } from "@/config/site";
@@ -99,6 +100,7 @@ export default async function RootLayout({
         <Header currentUser={currentUser} />
         {children}
         {/* <Footer /> */}
+        <NProgress />
         <RegisterModal />
         <LoginModal />
         <RentModal />
