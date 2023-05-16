@@ -10,14 +10,24 @@ type EmptyStateProps = {
   title?: string;
   subTitle?: string;
   showReset?: React.ReactNode;
+  onClick?: () => void;
 };
 
 export default function EmptyState({
   title = "No results found",
   subTitle = "Try adjusting your search or filter to find what you are looking for.",
   showReset,
+  onClick,
 }: EmptyStateProps) {
   const router = useRouter();
+  const onReset = React.useCallback(() => {
+    if (onClick) {
+      onClick();
+    } else {
+      router.back();
+    }
+  }, [onClick, router]);
+
   return (
     <section>
       <div className="layout flex h-[60vh] flex-col items-center justify-center gap-2">
@@ -27,7 +37,7 @@ export default function EmptyState({
             className="mt-4 w-48"
             outline
             label="Reset Filters"
-            onClick={() => router.push("/")}
+            onClick={onReset}
           />
         )}
       </div>
