@@ -28,6 +28,25 @@ export default function ListingsPagination({
     boundaries: 1,
     siblings: 1,
   });
+
+  const onNextPage = React.useCallback(() => {
+    pagination.next();
+  }, [pagination]);
+
+  const onPrevPage = React.useCallback(() => {
+    pagination.previous();
+  }, [pagination]);
+
+  const onPageChange = React.useCallback(
+    (page: number | "dots") => {
+      if (page === "dots") return;
+
+      onChange(page);
+      pagination.setPage(page);
+    },
+    [pagination]
+  );
+
   return (
     <section>
       <div className="layout">
@@ -43,7 +62,7 @@ export default function ListingsPagination({
         <ul className="my-10 flex flex-wrap items-center justify-center gap-3">
           <li>
             <button
-              onClick={() => pagination.previous()}
+              onClick={onPrevPage}
               className="rounded-full bg-primary p-1 text-3xl text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-primary hover:disabled:opacity-50"
               disabled={pagination.active === 1}
             >
@@ -54,7 +73,7 @@ export default function ListingsPagination({
             <li key={index}>
               {page !== "dots" ? (
                 <button
-                  onClick={() => pagination.setPage(page)}
+                  onClick={() => onPageChange(page)}
                   className={`${
                     pagination.active === page
                       ? "bg-primary text-white hover:cursor-not-allowed"
@@ -73,7 +92,7 @@ export default function ListingsPagination({
           ))}
           <li>
             <button
-              onClick={() => pagination.next()}
+              onClick={onNextPage}
               className="rounded-full bg-primary p-1 text-3xl text-white transition hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-primary hover:disabled:opacity-50"
               disabled={pagination.active === listings.length}
             >
