@@ -74,6 +74,7 @@ export default function ListingsCard({
               className="h-full w-full cursor-pointer object-cover transition duration-300 group-hover:scale-110"
               src={data.image}
               fill
+              sizes="100%"
               alt={data.title}
             />
           </React.Suspense>

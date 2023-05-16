@@ -1,5 +1,8 @@
+import * as React from "react";
+
 import EmptyState from "@/components/EmptyState";
 import ListingsCard from "@/components/listings/ListingsCard";
+import ListingsPagination from "@/components/listings/ListingsPagination";
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import getListings, { IListingsParams } from "@/actions/getListings";
@@ -13,10 +16,10 @@ export const dynamic = "force-dynamic";
 export default async function Home({ searchParams }: HomeProps) {
   const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
-
   if (listings.length === 0) {
     return <EmptyState showReset />;
   }
+
   return (
     <main className="min-h-screen">
       <section>
@@ -30,6 +33,7 @@ export default async function Home({ searchParams }: HomeProps) {
           ))}
         </div>
       </section>
+      <ListingsPagination listings={listings} currentUser={currentUser} />
     </main>
   );
 }
