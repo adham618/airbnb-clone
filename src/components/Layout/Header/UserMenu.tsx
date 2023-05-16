@@ -1,7 +1,6 @@
 "use client";
 
 import { useClickOutside } from "@mantine/hooks";
-import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 import * as React from "react";
 import { AiOutlineMenu } from "react-icons/ai";
@@ -21,8 +20,6 @@ export default function UserMenu({
 }: {
   currentUser?: SafeUser | null;
 }) {
-  const router = useRouter();
-
   const registerModal = useRegisterModal();
   const loginModal = useLoginModal();
   const rentModal = useRentModal();
