@@ -10,6 +10,7 @@ type EmptyStateProps = {
   title?: string;
   subTitle?: string;
   showReset?: React.ReactNode;
+  resetLabel?: string;
   onClick?: () => void;
 };
 
@@ -17,6 +18,7 @@ export default function EmptyState({
   title = "No results found",
   subTitle = "Try adjusting your search or filter to find what you are looking for.",
   showReset,
+  resetLabel = "Reset Filters",
   onClick,
 }: EmptyStateProps) {
   const router = useRouter();
@@ -24,7 +26,7 @@ export default function EmptyState({
     if (onClick) {
       onClick();
     } else {
-      router.back();
+      router.push("/");
     }
   }, [onClick, router]);
 
@@ -36,7 +38,7 @@ export default function EmptyState({
           <Button
             className="mt-4 w-48"
             outline
-            label="Reset Filters"
+            label={resetLabel}
             onClick={onReset}
           />
         )}
