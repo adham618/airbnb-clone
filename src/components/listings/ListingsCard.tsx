@@ -38,6 +38,7 @@ export default function ListingsCard({
   const handleCancel = React.useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
+      e.preventDefault();
       if (disabled) return;
       if (onAction) {
         onAction(actionId);

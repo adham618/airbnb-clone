@@ -1,5 +1,10 @@
 import EmptyState from "@/components/EmptyState";
 
+export const metadata = {
+  title: "Not Found",
+  description: "Page not found",
+};
+
 export default function NotFound() {
   return (
     <EmptyState
