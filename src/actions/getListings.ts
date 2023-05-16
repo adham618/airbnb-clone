@@ -23,7 +23,6 @@ export default async function getListings(params: IListingsParams) {
       endDate,
       location,
       category,
-      page,
     } = params;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
