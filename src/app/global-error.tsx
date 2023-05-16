@@ -24,7 +24,7 @@ export default function GlobalError({
           title="not found"
           subTitle="Something went wrong. Please try again later."
           showReset
-          resetLabel="Go Home"
+          onClick={() => reset()}
         />
       </body>
     </html>
