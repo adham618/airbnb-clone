@@ -21,7 +21,7 @@ export default function GlobalError({
     <html>
       <body>
         <EmptyState
-          title="not found"
+          title="An error occurred"
           subTitle="Something went wrong. Please try again later."
           showReset
           onClick={() => reset()}
