@@ -116,7 +116,7 @@ export default function ListingSection({
             category={category}
             description={listing.description}
             roomCount={listing.roomCount}
-            guestCount={listing.questCount}
+            guestCount={listing.guestCount}
             bathCount={listing.bathroomCount}
             locationValue={listing.location}
           />

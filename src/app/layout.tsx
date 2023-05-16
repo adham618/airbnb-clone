@@ -8,6 +8,7 @@ import Header from "@/components/Layout/Header";
 import LoginModal from "@/components/modals/LoginModal";
 import RegisterModal from "@/components/modals/RegisterModal";
 import RentModal from "@/components/modals/RentModal";
+import SearchModal from "@/components/modals/SearchModal";
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import { siteConfig } from "@/config/site";
@@ -93,7 +94,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <head></head>
+      <head />
       <body className={nunito.className}>
         <Header currentUser={currentUser} />
         {children}
@@ -101,6 +102,7 @@ export default async function RootLayout({
         <RegisterModal />
         <LoginModal />
         <RentModal />
+        <SearchModal />
         <Toaster />
       </body>
     </html>

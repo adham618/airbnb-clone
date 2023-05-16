@@ -47,7 +47,7 @@ export default function RentModal() {
     defaultValues: {
       category: "",
       location: null,
-      questCount: 1,
+      guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
       image: "",
@@ -59,7 +59,7 @@ export default function RentModal() {
 
   const category = watch("category");
   const location = watch("location");
-  const questCount = watch("questCount");
+  const guestCount = watch("guestCount");
   const roomCount = watch("roomCount");
   const bathroomCount = watch("bathroomCount");
   const image = watch("image");
@@ -180,13 +180,13 @@ export default function RentModal() {
         <Counter
           title="Guests"
           subTitle="How many guests can your place accommodate?"
-          value={questCount}
-          onChange={(value) => setCustomValue("questCount", value)}
+          value={guestCount}
+          onChange={(value) => setCustomValue("guestCount", value)}
         />
         <hr />
         <Counter
           title="Rooms"
-          subTitle="How many  rooms can guests use?"
+          subTitle="How many rooms can guests use?"
           value={roomCount}
           onChange={(value) => setCustomValue("roomCount", value)}
         />

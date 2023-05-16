@@ -2,9 +2,17 @@
 
 import * as React from "react";
 import { BiSearch } from "react-icons/bi";
+
+import useSearchModal from "@/hooks/useSearchModal";
+
 export default function Search() {
+  const searchModal = useSearchModal();
+
   return (
-    <div className="w-full cursor-pointer rounded-full border py-2 shadow-sm transition hover:shadow-md md:w-auto">
+    <div
+      onClick={searchModal.onOpen}
+      className="w-full cursor-pointer rounded-full border py-2 shadow-sm transition hover:shadow-md md:w-auto"
+    >
       <div className="flex items-center justify-between">
         <div className="px-6 text-sm font-semibold">Anywhere</div>
         <div className="hidden flex-1 border-x px-6 text-center text-sm font-semibold sm:block">
