@@ -9,6 +9,7 @@ import useCountries from "@/hooks/useCountries";
 
 import Button from "@/components/Button";
 import HeartButton from "@/components/HeartButton";
+import { Skeleton } from "@/components/skeleton";
 
 import { SafeListing, SafeReservation, SafeUser } from "@/types";
 
@@ -67,12 +68,15 @@ export default function ListingsCard({
           className="relative aspect-square w-full overflow-hidden rounded-xl"
           aria-label="View Listing"
         >
-          <Image
-            className="h-full w-full cursor-pointer object-cover transition duration-300 group-hover:scale-110"
-            src={data.image}
-            fill
-            alt={data.title}
-          />
+          <React.Suspense fallback={<Skeleton className="h-full w-full" />}>
+            <Image
+              className="h-full w-full cursor-pointer object-cover transition duration-300 group-hover:scale-110"
+              src={data.image}
+              fill
+              alt={data.title}
+            />
+          </React.Suspense>
+
           <div className="absolute right-2 top-2">
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
