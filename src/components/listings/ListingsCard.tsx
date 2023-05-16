@@ -9,7 +9,7 @@ import useCountries from "@/hooks/useCountries";
 
 import Button from "@/components/Button";
 import HeartButton from "@/components/HeartButton";
-import { Skeleton } from "@/components/skeleton";
+import Skeleton from "@/components/skeleton";
 
 import { SafeListing, SafeReservation, SafeUser } from "@/types";
 
