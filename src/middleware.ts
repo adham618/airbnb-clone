@@ -1,51 +1,7 @@
-import { NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
-import { withAuth } from "next-auth/middleware";
-
-export default withAuth(
-  async function middleware(req) {
-    const pathname = req.nextUrl.pathname;
-
-    // Manage route protection
-    const isAuth = await getToken({ req });
-    const isLoginPage = pathname.startsWith("/login");
-
-    const sensitiveRoutes = [
-      "/trips",
-      "/reservations",
-      "/properties",
-      "/favorites",
-    ];
-    const isAccessingSensitiveRoute = sensitiveRoutes.some((route) =>
-      pathname.startsWith(route)
-    );
-
-    if (isLoginPage) {
-      if (isAuth) {
-        return NextResponse.redirect(new URL("/", req.url));
-      }
-
-      return NextResponse.next();
-    }
-
-    if (!isAuth && isAccessingSensitiveRoute) {
-      return NextResponse.redirect(new URL("/", req.url));
-    }
-
-    if (pathname === "/") {
-      return NextResponse.redirect(new URL("/", req.url));
-    }
-  },
-  {
-    callbacks: {
-      async authorized() {
-        return true;
-      },
-    },
-  }
-);
+/* eslint-disable no-console */
+export { default } from "next-auth/middleware";
 
 export const config = {
-  // matchter: ["/", "/login", "/dashboard/:path*"],
+  // matcher: '/about/:path*',
   matcher: ["/trips", "/reservations", "/properties", "/favorites"],
 };
