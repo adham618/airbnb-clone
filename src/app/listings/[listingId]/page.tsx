@@ -19,10 +19,10 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   return {
     title: listing?.title,
-    description: listing?.description,
+    description: listing?.description.slice(0, 100) + "...",
     openGraph: {
       title: listing?.title,
-      description: listing?.description,
+      description: listing?.description.slice(0, 100) + "...",
       url: `${siteConfig.url}/listings/${listing?.id}`,
       siteName: siteConfig.name,
       images: [
@@ -36,12 +36,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     },
     twitter: {
       title: listing?.title,
-      description: listing?.description,
+      description: listing?.description.slice(0, 100) + "...",
       images: [listing?.image || ""],
     },
   };
 }
-
 export default async function Listings({ params }: Params) {
   const listing = await getListingById(params);
   const reservation = await getReservations(params);
