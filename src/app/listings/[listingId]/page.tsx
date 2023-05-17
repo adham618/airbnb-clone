@@ -34,6 +34,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
         },
       ],
     },
+    twitter: {
+      title: listing?.title,
+      description: listing?.description,
+      images: [listing?.image || ""],
+    },
   };
 }
 
