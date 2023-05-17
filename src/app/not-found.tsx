@@ -1,6 +1,8 @@
+import { Metadata } from "next";
+
 import EmptyState from "@/components/EmptyState";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Not Found",
   description: "Page not found",
 };

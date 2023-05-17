@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import EmptyState from "@/components/EmptyState";
 
 import getCurrentUser from "@/actions/getCurrentUser";
@@ -5,7 +7,7 @@ import getFavoriteListings from "@/actions/getFavoriteListings";
 
 import FavoritesSection from "./FavoritesSection";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "My Favorites",
   description: "Manage your favorite listings.",
 };

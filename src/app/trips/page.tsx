@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import EmptyState from "@/components/EmptyState";
 
 import getCurrentUser from "@/actions/getCurrentUser";
@@ -5,7 +7,7 @@ import getReservations from "@/actions/getReservations";
 
 import TripsSection from "./TripsSection";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "My Trips",
   description:
     "Manage your upcoming trips, including message threads with hosts.",

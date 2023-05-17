@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import EmptyState from "@/components/EmptyState";
 
 import getCurrentUser from "@/actions/getCurrentUser";
@@ -5,7 +7,7 @@ import getListings from "@/actions/getListings";
 
 import PropertiesSection from "./PropertiesSection";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "My Properties",
   description: "List of your Properties.",
 };
