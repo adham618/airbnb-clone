@@ -6,15 +6,15 @@ import * as React from "react";
 type MenuItemsProps = {
   onClick?: () => void;
   label: string;
-  link?: string;
+  href?: string;
 } & React.ComponentPropsWithoutRef<"div">;
 
-export default function MenuItem({ onClick, label, link }: MenuItemsProps) {
+export default function MenuItem({ onClick, label, href }: MenuItemsProps) {
   return (
     <>
-      {link ? (
+      {href ? (
         <Link
-          href={link}
+          href={href}
           className="px-4 py-3 text-left font-semibold transition hover:bg-neutral-100"
         >
           {label}
