@@ -81,6 +81,7 @@ export const metadata: Metadata = {
     "msapplication-config": "/favicon/browserconfig.xml",
   },
   robots: "index, follow",
+  metadataBase: new URL(siteConfig.url),
   // verification: {
   //   google: "1234567890",
   //   yandex: "1234567890",
