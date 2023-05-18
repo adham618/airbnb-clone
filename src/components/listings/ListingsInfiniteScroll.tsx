@@ -4,6 +4,9 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import * as React from "react";
 import { useInView } from "react-intersection-observer";
+import { BeatLoader } from "react-spinners";
+
+import Loader from "@/components/Loader";
 
 import ListingsCard from "./ListingsCard";
 
@@ -60,14 +63,14 @@ export default function ListingsInfiniteScroll({
         {"An error has occurred: " + JSON.stringify(error)}
       </div>
     );
-  if (isLoading) return <div className="loading">Loading...</div>;
+  if (isLoading) return <Loader />;
 
   // console.log("data:",data);
 
   return (
     <section>
-      <div className="layout">
-        <div className="grid grid-cols-1 gap-8 py-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+      <div className="layout py-6">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {isSuccess &&
             data?.pages.map((page) =>
               page.data.map((listing: SafeListing, index: number) => {
@@ -93,9 +96,12 @@ export default function ListingsInfiniteScroll({
                 }
               })
             )}
-
-          {isFetchingNextPage && <p className="mb-4">Loading...</p>}
         </div>
+        {isFetchingNextPage && (
+          <div className="mt-8 flex justify-center">
+            <BeatLoader color="#FF385C" />
+          </div>
+        )}
       </div>
     </section>
   );
