@@ -69,7 +69,7 @@ export default function ListingsCard({
           className="relative aspect-square w-full overflow-hidden rounded-xl"
           aria-label="View Listing"
         >
-          <React.Suspense fallback={<Skeleton className="h-full w-full" />}>
+          {data.image ? (
             <Image
               className="h-full w-full cursor-pointer object-cover transition duration-300 group-hover:scale-110"
               src={data.image}
@@ -77,7 +77,9 @@ export default function ListingsCard({
               sizes="100%"
               alt={data.title}
             />
-          </React.Suspense>
+          ) : (
+            <Skeleton className="h-full w-full" />
+          )}
 
           <div className="absolute right-2 top-2">
             <HeartButton listingId={data.id} currentUser={currentUser} />
