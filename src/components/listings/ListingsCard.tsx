@@ -76,8 +76,6 @@ export default function ListingsCard({
               fill
               sizes="100%"
               alt={data.title}
-              placeholder="blur"
-              blurDataURL={data.image}
             />
           </React.Suspense>
 
