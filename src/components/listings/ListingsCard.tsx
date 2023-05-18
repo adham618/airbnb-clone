@@ -78,7 +78,7 @@ export default function ListingsCard({
               alt={data.title}
             />
           ) : (
-            <Skeleton className="h-full w-full" />
+            <Skeleton className="aspect-square h-full w-full" />
           )}
 
           <div className="absolute right-2 top-2">

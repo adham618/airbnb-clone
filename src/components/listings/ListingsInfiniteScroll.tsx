@@ -2,6 +2,7 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useSearchParams } from "next/navigation";
 import * as React from "react";
 import { useInView } from "react-intersection-observer";
 import { BeatLoader } from "react-spinners";
@@ -19,10 +20,41 @@ type ListingsPaginationProps = {
 type UserQueryParams = {
   take?: number;
   lastCursor?: string;
+  userId?: string;
+  guestCount?: number;
+  roomCount?: number;
+  bathroomCount?: number;
+  startDate?: string;
+  endDate?: string;
+  location?: string;
+  category?: string;
 };
-const allListings = async ({ take, lastCursor }: UserQueryParams) => {
+
+const allListings = async ({
+  take,
+  lastCursor,
+  userId,
+  guestCount,
+  roomCount,
+  bathroomCount,
+  startDate,
+  endDate,
+  location,
+  category,
+}: UserQueryParams) => {
   const response = await axios.get("/api/listings", {
-    params: { take, lastCursor },
+    params: {
+      take,
+      lastCursor,
+      userId,
+      guestCount,
+      roomCount,
+      bathroomCount,
+      startDate,
+      endDate,
+      location,
+      category,
+    },
   });
   return response?.data;
 };
@@ -31,6 +63,17 @@ export default function ListingsInfiniteScroll({
   currentUser,
 }: ListingsPaginationProps) {
   const { ref, inView } = useInView();
+  const params = useSearchParams();
+
+  const userId = params?.get("userId");
+  const guestCount = params?.get("guestCount");
+  const roomCount = params?.get("roomCount");
+  const bathroomCount = params?.get("bathroomCount");
+  const startDate = params?.get("startDate");
+  const endDate = params?.get("endDate");
+  const location = params?.get("location");
+  const category = params?.get("category");
+
   // useInfiniteQuery is a hook that accepts a queryFn and queryKey and returns the result of the queryFn
   const {
     data,
@@ -43,8 +86,29 @@ export default function ListingsInfiniteScroll({
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryFn: ({ pageParam = "" }) =>
-      allListings({ take: 10, lastCursor: pageParam }),
-    queryKey: ["listings"],
+      allListings({
+        take: 10,
+        lastCursor: pageParam,
+        userId: userId || undefined,
+        guestCount: guestCount ? Number(guestCount) : undefined,
+        roomCount: roomCount ? Number(roomCount) : undefined,
+        bathroomCount: bathroomCount ? Number(bathroomCount) : undefined,
+        startDate: startDate || undefined,
+        endDate: endDate || undefined,
+        location: location || undefined,
+        category: category || undefined,
+      }),
+    queryKey: [
+      "listings",
+      userId,
+      guestCount,
+      roomCount,
+      bathroomCount,
+      startDate,
+      endDate,
+      location,
+      category,
+    ],
     getNextPageParam: (lastPage) => {
       return lastPage?.metaData.lastCursor;
     },
@@ -70,7 +134,7 @@ export default function ListingsInfiniteScroll({
   return (
     <section>
       <div className="layout py-6">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {isSuccess &&
             data?.pages.map((page) =>
               page.data.map((listing: SafeListing, index: number) => {

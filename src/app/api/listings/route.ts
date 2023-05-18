@@ -50,13 +50,13 @@ export async function GET(req: Request) {
     const lastCursor = url.searchParams.get("lastCursor");
 
     const userId = url.searchParams.get("userId");
-    const category = url.searchParams.get("category");
-    const roomCount = url.searchParams.get("roomCount");
     const guestCount = url.searchParams.get("guestCount");
+    const roomCount = url.searchParams.get("roomCount");
     const bathroomCount = url.searchParams.get("bathroomCount");
-    const location = url.searchParams.get("location");
     const startDate = url.searchParams.get("startDate");
     const endDate = url.searchParams.get("endDate");
+    const location = url.searchParams.get("location");
+    const category = url.searchParams.get("category");
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const query: any = {};
@@ -109,6 +109,7 @@ export async function GET(req: Request) {
         },
       };
     }
+
     const result = await prisma.listing.findMany({
       take: take ? parseInt(take as string) : 10,
       ...(lastCursor && {
