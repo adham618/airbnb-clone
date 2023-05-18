@@ -6,7 +6,6 @@ const nextConfig = {
   },
 
   reactStrictMode: true,
-  swcMinify: true,
 
   // add domain whitelist
   images: {
