@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://airbnbclone-vert-eight.vercel.app
+
+# Sitemaps
+Sitemap: https://airbnbclone-vert-eight.vercel.app/sitemap.xml

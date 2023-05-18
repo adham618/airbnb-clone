@@ -13,6 +13,7 @@ import NProgress from "@/components/NProgress";
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import { siteConfig } from "@/config/site";
+import Providers from "@/utils/provider";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -98,7 +99,7 @@ export default async function RootLayout({
       <head />
       <body className={nunito.className}>
         <Header currentUser={currentUser} />
-        {children}
+        <Providers>{children}</Providers>
         {/* <Footer /> */}
         <NProgress />
         <RegisterModal />

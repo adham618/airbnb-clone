@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import EmptyState from "@/components/EmptyState";
-import ListingsPagination from "@/components/listings/ListingsPagination";
+import ListingsInfiniteScroll from "@/components/listings/ListingsInfiniteScroll";
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import getListings, { IListingsParams } from "@/actions/getListings";
@@ -32,7 +32,8 @@ export default async function Home({ searchParams }: HomeProps) {
           ))}
         </div>
       </section> */}
-      <ListingsPagination listings={listings} currentUser={currentUser} />
+      <ListingsInfiniteScroll currentUser={currentUser} />
+      {/* <ListingsPagination listings={listings} currentUser={currentUser} /> */}
     </main>
   );
 }

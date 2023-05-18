@@ -9,7 +9,8 @@ export type IListingsParams = {
   endDate?: string;
   location?: string;
   category?: string;
-  page?: number;
+  cursor?: string;
+  take?: string;
 };
 
 export default async function getListings(params: IListingsParams) {
@@ -76,7 +77,6 @@ export default async function getListings(params: IListingsParams) {
         },
       };
     }
-
     const listings = await prisma.listing.findMany({
       where: query,
       orderBy: {
