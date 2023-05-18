@@ -1,7 +1,6 @@
-/* eslint-disable no-console */
 export { default } from "next-auth/middleware";
 
 export const config = {
-  // matcher: '/about/:path*',
+  // "/admin/:path*", // Matches any path starting with /api
   matcher: ["/trips", "/reservations", "/properties", "/favorites"],
 };
