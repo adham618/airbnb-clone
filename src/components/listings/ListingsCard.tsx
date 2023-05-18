@@ -8,8 +8,8 @@ import * as React from "react";
 import useCountries from "@/hooks/useCountries";
 
 import Button from "@/components/Button";
-import Skeleton from "@/components/ddd";
 import HeartButton from "@/components/HeartButton";
+import Skeleton from "@/components/Skeleton";
 
 import { SafeListing, SafeReservation, SafeUser } from "@/types";
 
