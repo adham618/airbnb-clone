@@ -54,7 +54,7 @@ export default function Pagination({ total }: propertiesPaginationProps) {
                 {page}
               </button>
             ) : (
-              <div className="flex h-10 items-center rounded-sm border-2 border-primary px-2.5 py-1 text-base transition hover:cursor-not-allowed hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-50 hover:disabled:opacity-50">
+              <div className="flex h-10 items-center rounded-sm border-2 border-primary px-2.5 py-1 text-base transition hover:opacity-80 ">
                 <BsThreeDots />
               </div>
             )}
