@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 
+import { prisma } from "@/lib/prismadb";
+
 import EmptyState from "@/components/EmptyState";
 
 import getCurrentUser from "@/actions/getCurrentUser";
@@ -12,8 +14,17 @@ export const metadata: Metadata = {
   description: "List of your Properties.",
 };
 
-export default async function Properties() {
+export default async function Properties({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
   const currentUser = await getCurrentUser();
+  const propertiesCount = await prisma.listing.count({
+    where: {
+      userId: currentUser?.id,
+    },
+  });
 
   if (!currentUser) {
     return (
@@ -24,7 +35,10 @@ export default async function Properties() {
     );
   }
 
-  const listings = await getListings({ userId: currentUser.id });
+  const listings = await getListings({
+    userId: currentUser.id,
+    page: searchParams.page,
+  });
 
   if (listings.length === 0) {
     return (
@@ -36,7 +50,11 @@ export default async function Properties() {
   }
   return (
     <main className="min-h-screen">
-      <PropertiesSection listings={listings} currentUser={currentUser} />
+      <PropertiesSection
+        listings={listings}
+        currentUser={currentUser}
+        total={Math.ceil(propertiesCount / 10)}
+      />
     </main>
   );
 }

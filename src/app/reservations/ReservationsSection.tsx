@@ -47,7 +47,7 @@ export default function ReservationsSection({
     <section>
       <div className="layout py-8">
         <Heading title="Reservations" subTitle="Bookings on your properties" />
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {reservations.map((reservation) => (
             <ListingsCard
               key={reservation.id}

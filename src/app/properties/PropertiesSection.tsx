@@ -7,17 +7,20 @@ import toast from "react-hot-toast";
 
 import Heading from "@/components/Heading";
 import ListingsCard from "@/components/listings/ListingsCard";
+import Pagination from "@/components/Pagination";
 
 import { SafeListing, SafeUser } from "@/types";
 
 type PropertiesSectionProps = {
   listings: SafeListing[];
   currentUser?: SafeUser | null;
+  total: number;
 };
 
 export default function PropertiesSection({
   listings,
   currentUser,
+  total,
 }: PropertiesSectionProps) {
   const router = useRouter();
   const [deletingId, setDeletingId] = React.useState("");
@@ -46,7 +49,7 @@ export default function PropertiesSection({
     <section>
       <div className="layout py-8">
         <Heading title="Properties" subTitle="List of your Properties." />
-        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
           {listings.map((listing) => (
             <ListingsCard
               key={listing.id}
@@ -59,6 +62,7 @@ export default function PropertiesSection({
             />
           ))}
         </div>
+        <Pagination total={total} />
       </div>
     </section>
   );

@@ -4,10 +4,10 @@ import EmptyState from "@/components/EmptyState";
 import ListingsInfiniteScroll from "@/components/listings/ListingsInfiniteScroll";
 
 import getCurrentUser from "@/actions/getCurrentUser";
-import getListings, { IListingsParams } from "@/actions/getListings";
+import getListings from "@/actions/getListings";
 
 type HomeProps = {
-  searchParams: IListingsParams;
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export const dynamic = "force-dynamic";

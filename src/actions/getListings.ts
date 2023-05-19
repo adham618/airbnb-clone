@@ -1,19 +1,8 @@
 import { prisma } from "@/lib/prismadb";
 
-export type IListingsParams = {
-  userId?: string;
-  guestCount?: number;
-  roomCount?: number;
-  bathroomCount?: number;
-  startDate?: string;
-  endDate?: string;
-  location?: string;
-  category?: string;
-  cursor?: string;
-  take?: string;
-};
-
-export default async function getListings(params: IListingsParams) {
+export default async function getListings(params: {
+  [key: string]: string | string[] | undefined;
+}) {
   try {
     const {
       userId,
@@ -24,6 +13,7 @@ export default async function getListings(params: IListingsParams) {
       endDate,
       location,
       category,
+      page,
     } = params;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -77,7 +67,11 @@ export default async function getListings(params: IListingsParams) {
         },
       };
     }
+
+    const pag = typeof page === "string" ? +page : 1;
     const listings = await prisma.listing.findMany({
+      take: 10,
+      skip: (pag - 1) * 10,
       where: query,
       orderBy: {
         createdAt: "desc",
