@@ -34,16 +34,16 @@
     @apply h-1 w-1 sm:h-2 sm:w-2;
   }
 
-  ::-webkit-scrollbar-track {
+  /* ::-webkit-scrollbar-track {
     @apply bg-gray-100;
-  }
+  } */
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-sm bg-primary;
+    @apply rounded-xl bg-primary;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary-hover;
+    @apply bg-primary/90;
   }
   /* hide scrollbar */
   /* Chrome, Safari and Opera */

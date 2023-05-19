@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-console */
+import { faker } from "@faker-js/faker";
+import { PrismaClient } from "@prisma/client";
 
-const { PrismaClient } = require("@prisma/client");
-const { faker } = require("@faker-js/faker");
 const prisma = new PrismaClient();
 
 const fakerListing = () => ({
@@ -29,16 +27,19 @@ const fakerListing = () => ({
 });
 
 async function main() {
+  // eslint-disable-next-line no-console
   console.log("Seeding...");
   const users = Array.from({ length: 400 }, fakerListing);
   await prisma.listing.createMany({
     data: users,
   });
+  // eslint-disable-next-line no-console
   console.log("Seeded!");
 }
 
 main()
   .catch((e) => {
+    // eslint-disable-next-line no-console
     console.error(e);
     process.exit(1);
   })
