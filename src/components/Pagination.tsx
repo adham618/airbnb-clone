@@ -21,7 +21,6 @@ export default function Pagination({ total }: propertiesPaginationProps) {
     boundaries: 1,
     siblings: 1,
   });
-  console.log(pagination.active === total, pagination.active, total);
   return (
     <>
       <ul className="my-10 flex flex-wrap items-center justify-center gap-3">
