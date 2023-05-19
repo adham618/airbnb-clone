@@ -1,19 +1,12 @@
 import { Metadata } from "next";
 import { Nunito } from "next/font/google";
-import { Toaster } from "react-hot-toast";
 
 import "../styles/globals.css";
 
-import Header from "@/components/Layout/Header";
-import LoginModal from "@/components/modals/LoginModal";
-import RegisterModal from "@/components/modals/RegisterModal";
-import RentModal from "@/components/modals/RentModal";
-import SearchModal from "@/components/modals/SearchModal";
-import NProgress from "@/components/NProgress";
-
 import getCurrentUser from "@/actions/getCurrentUser";
-import { siteConfig } from "@/config/site";
-import Providers from "@/utils/provider";
+
+import Providers from "./providers";
+import { siteConfig } from "../../siteConfig";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
@@ -99,15 +92,7 @@ export default async function RootLayout({
     <html lang="en">
       <head />
       <body className={nunito.className}>
-        <Header currentUser={currentUser} />
-        <Providers>{children}</Providers>
-        {/* <Footer /> */}
-        <NProgress />
-        <RegisterModal />
-        <LoginModal />
-        <RentModal />
-        <SearchModal />
-        <Toaster />
+        <Providers currentUser={currentUser}>{children}</Providers>
       </body>
     </html>
   );
