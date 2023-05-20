@@ -5,7 +5,6 @@
 import { siteConfig } from "./siteConfig";
 
 module.exports = {
-  /** Without additional '/' on the end, e.g. https://google.com */
   siteUrl: siteConfig.siteUrl,
   generateRobotsTxt: true,
   robotsTxtOptions: {
