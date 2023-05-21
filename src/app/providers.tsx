@@ -2,11 +2,13 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 import React from "react";
-import { Toaster } from "react-hot-toast";
 
+import useLoggedWindow from "@/hooks/useLoggedWindow";
+
+import DismissableToast from "@/components/DismissableToast";
 import Header from "@/components/Layout/Header";
 import LoginModal from "@/components/modals/LoginModal";
 import RegisterModal from "@/components/modals/RegisterModal";
@@ -25,8 +27,14 @@ function Providers({ children, currentUser }: ProvidersProps) {
   const [client] = React.useState(
     new QueryClient({ defaultOptions: { queries: { staleTime: 5000 } } })
   );
+  const router = useRouter();
   const pathName = usePathname();
   const googleWindow = pathName === "/google-signin";
+  const { isLogged } = useLoggedWindow();
+
+  React.useEffect(() => {
+    isLogged && router.refresh();
+  }, [isLogged, router]);
 
   return (
     <>
@@ -45,7 +53,7 @@ function Providers({ children, currentUser }: ProvidersProps) {
             <LoginModal />
             <RentModal />
             <SearchModal />
-            <Toaster />
+            <DismissableToast />
           </SessionProvider>
           {/* <Footer /> */}
         </>

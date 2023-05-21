@@ -29,6 +29,7 @@ export default function CommentModal({
 }: ModalProps) {
   return (
     <>
+      <div className="fixed inset-0 z-40 bg-black opacity-25"/>
       <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden outline-none focus:outline-none">
         <div
           className={`relative mx-auto my-6 w-full ${
@@ -85,7 +86,6 @@ export default function CommentModal({
           </div>
         </div>
       </div>
-      <div className="fixed inset-0 z-40 bg-black opacity-25"></div>
     </>
   );
 }

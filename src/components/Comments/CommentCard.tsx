@@ -8,7 +8,7 @@ import * as React from "react";
 import toast from "react-hot-toast";
 
 import EditCommentForm from "@/components/Comments/EditCommentForm";
-import CommentModal, { ModalSize } from "@/components/modals/CommentModal";
+import CommentModal, { ModalSize } from "./CommentModal";
 
 import capitalizeWord from "@/utils/capitalizeWord";
 import formatDate from "@/utils/formatDate";
@@ -43,8 +43,8 @@ export default function CommentCard({
   const [loadLike, setLoadLike] = useState<boolean>(false);
   const queryClient = useQueryClient();
 
-  // const currentUserLiked =
-  //   (session && likes?.some((like) => like.userId === user?.id)) || false;
+  const currentUserLiked =
+    (session && likes?.some((like) => like.userId === user?.id)) || false;
 
   // console.log("likes:",props.likes);
 
@@ -52,11 +52,11 @@ export default function CommentCard({
     commentId: string;
   };
 
-  const likePost = async ({ commentId }: LikeParams) => {
+  const likelisting = async ({ commentId }: LikeParams) => {
     setLoadLike(true);
     try {
-      await axios.post("/api/comments/addLike", { commentId });
-      queryClient.invalidateQueries(["post", listingId]);
+      await axios.listing("/api/comments/addLike", { commentId });
+      queryClient.invalidateQueries(["listing", listingId]);
       //return response?.data;
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -83,14 +83,14 @@ export default function CommentCard({
         toast.success("Comment has been Deleted 🔥", {
           id: "delete-comment-toast",
         });
-        queryClient.invalidateQueries(["post", listingId]);
+        queryClient.invalidateQueries(["listing", listingId]);
         // console.log(data.data);
       },
     }
   );
 
   const clickHeart = () => {
-    likePost({ commentId });
+    likelisting({ commentId });
   };
 
   const openEditModal = () => {
@@ -149,18 +149,18 @@ export default function CommentCard({
       </div>
       {showDeleteModal && (
         <CommentModal
-          modalTitle="Delete Post"
+          modalTitle="Delete listing"
           closeModal={() => setDeleteShowModal(false)}
           saveFunction={() => mutate(commentId)}
           footer={true}
           size={ModalSize.small}
         >
-          Are you sure you want to delete this post?
+          Are you sure you want to delete this listing?
         </CommentModal>
       )}
       {showEditModal && (
         <CommentModal
-          modalTitle="Edit Post"
+          modalTitle="Edit listing"
           closeModal={() => setEditShowModal(false)}
           footer={false}
           size={ModalSize.medium}
