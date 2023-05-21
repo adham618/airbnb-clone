@@ -2,11 +2,9 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { usePathname, useRouter } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 import React from "react";
-
-import useLoggedWindow from "@/hooks/useLoggedWindow";
 
 import DismissableToast from "@/components/DismissableToast";
 import Header from "@/components/Layout/Header";
@@ -27,14 +25,17 @@ function Providers({ children, currentUser }: ProvidersProps) {
   const [client] = React.useState(
     new QueryClient({ defaultOptions: { queries: { staleTime: 5000 } } })
   );
-  const router = useRouter();
   const pathName = usePathname();
   const googleWindow = pathName === "/google-signin";
-  const { isLogged } = useLoggedWindow();
-
+  const router = useRouter();
   React.useEffect(() => {
-    isLogged && router.refresh();
-  }, [isLogged, router]);
+    if (googleWindow) {
+      return;
+    }
+    if (localStorage.getItem("session-info")) {
+      return localStorage.removeItem("session-info"), redirect("/f");
+    }
+  }, [currentUser, googleWindow, pathName, router]);
 
   return (
     <>

@@ -20,6 +20,7 @@ export default function HeartButton({
     listingId,
     currentUser,
   });
+
   return (
     <div
       onClick={toggleFavorite}

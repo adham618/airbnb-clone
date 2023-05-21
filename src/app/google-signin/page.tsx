@@ -3,18 +3,20 @@
 import { signIn, useSession } from "next-auth/react";
 import { useEffect } from "react";
 
-import useLoggedWindow from "@/hooks/useLoggedWindow";
-
 export default function SignIn() {
   const { data: session, status } = useSession();
-  const { setLogged } = useLoggedWindow();
   useEffect(() => {
     if (!(status === "loading") && !session) void signIn("google");
+
     if (session) {
+      if (localStorage.getItem("session-info"))
+        // The info is already in localStorage, do nothing
+        return;
+
+      localStorage.setItem("session-info", "true");
       window.close();
-      setLogged();
     }
-  }, [session, setLogged, status]);
+  }, [session, status]);
 
   return (
     <div
