@@ -14,6 +14,8 @@ import ListingHead from "@/components/listings/ListingHead";
 import ListingInfo from "@/components/listings/ListingInfo";
 import ListingResvervation from "@/components/listings/ListingResvervation";
 
+import ListingComments from "./ListingComments";
+
 import { SafeListing, SafeReservation, SafeUser } from "@/types";
 
 const initialDateRange = {
@@ -132,6 +134,7 @@ export default function ListingSection({
             />
           </div>
         </div>
+        <ListingComments listingId={listing.id} currentUser={currentUser} />
       </div>
     </section>
   );

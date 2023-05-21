@@ -33,7 +33,6 @@ export default async function Home({ searchParams }: HomeProps) {
         </div>
       </section> */}
       <ListingsInfiniteScroll currentUser={currentUser} />
-      {/* <ListingsPagination listings={listings} currentUser={currentUser} /> */}
     </main>
   );
 }

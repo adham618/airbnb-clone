@@ -1,12 +1,12 @@
 "use client";
 
 import { format } from "date-fns";
-import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
 
 import useCountries from "@/hooks/useCountries";
 
+import BlurImage from "@/components/BlurImage";
 import Button from "@/components/Button";
 import HeartButton from "@/components/HeartButton";
 import Skeleton from "@/components/Skeleton";
@@ -70,7 +70,7 @@ export default function ListingsCard({
           aria-label="View Listing"
         >
           <React.Suspense fallback={<Skeleton className="h-full w-full" />}>
-            <Image
+            <BlurImage
               className="h-full w-full cursor-pointer object-cover transition duration-300 group-hover:scale-110"
               src={data.image}
               fill
