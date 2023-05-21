@@ -15,8 +15,6 @@ import Button from "@/components/Button";
 import Heading from "@/components/Heading";
 import Input from "@/components/inputs/Input";
 
-import popupCenter from "@/utils/popupCenter";
-
 import Modal from "./Modal";
 export default function LoginModal() {
   const router = useRouter();
@@ -79,7 +77,7 @@ export default function LoginModal() {
     <div className="mt-3 flex flex-col gap-4">
       <hr />
       <Button
-        onClick={() => popupCenter("/google-signin", "Google Sign In")}
+        onClick={() => signIn("google")}
         icon={FcGoogle}
         outline
         label="Continue with Google"

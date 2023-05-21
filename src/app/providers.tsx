@@ -31,23 +31,23 @@ function Providers({ children, currentUser }: ProvidersProps) {
   return (
     <>
       {googleWindow ? (
-        children
+        <SessionProvider>{children}</SessionProvider>
       ) : (
         <>
-          <Header currentUser={currentUser} />
           <SessionProvider>
+            <NProgress />
+            <Header currentUser={currentUser} />
             <QueryClientProvider client={client}>
               {children}
               <ReactQueryDevtools initialIsOpen={false} />
             </QueryClientProvider>
+            <RegisterModal />
+            <LoginModal />
+            <RentModal />
+            <SearchModal />
+            <Toaster />
           </SessionProvider>
           {/* <Footer /> */}
-          <NProgress />
-          <RegisterModal />
-          <LoginModal />
-          <RentModal />
-          <SearchModal />
-          <Toaster />
         </>
       )}
     </>
