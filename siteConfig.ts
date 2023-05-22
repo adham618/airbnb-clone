@@ -5,7 +5,7 @@ export const siteConfig = {
   ogImage: "https://airbnbclone-vert-eight.vercel.app/images/og.jpg",
   description: "Airbnb clone built with Next.js, Tailwind CSS and TypeScript.",
   links: {
-    twitter: "https://twitter.com/",
+    twitter: "https://twitter.com/test",
     github: "https://github.com/adham618",
   },
 };

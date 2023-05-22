@@ -14,6 +14,15 @@ export default async function getListingById(params: IParams) {
       },
       include: {
         user: true,
+        comments: {
+          include: {
+            user: true,
+            likes: true,
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
+        },
       },
     });
 

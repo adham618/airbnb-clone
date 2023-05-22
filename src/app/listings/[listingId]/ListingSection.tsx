@@ -134,7 +134,11 @@ export default function ListingSection({
             />
           </div>
         </div>
-        <ListingComments listingId={listing.id} currentUser={currentUser} />
+        <ListingComments
+          listingId={listing.id}
+          comments={listing.comments}
+          currentUser={currentUser}
+        />
       </div>
     </section>
   );

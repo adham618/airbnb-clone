@@ -5,13 +5,15 @@ import axios from "axios";
 import Image from "next/image";
 import { useState } from "react";
 import * as React from "react";
-import toast from "react-hot-toast";
+import toast, { LoaderIcon } from "react-hot-toast";
+import { AiFillDelete, AiFillEdit, AiFillLike } from "react-icons/ai";
 
 import EditCommentForm from "@/components/Comments/EditCommentForm";
-import CommentModal, { ModalSize } from "./CommentModal";
 
 import capitalizeWord from "@/utils/capitalizeWord";
 import formatDate from "@/utils/formatDate";
+
+import CommentModal, { ModalSize } from "./CommentModal";
 
 type CommentCardProps = {
   name: string;
@@ -38,13 +40,15 @@ export default function CommentCard({
   listingId,
   commentId,
 }: CommentCardProps) {
+  // const { data: session } = useSession();
+
   const [showDeleteModal, setDeleteShowModal] = useState<boolean>(false);
   const [showEditModal, setEditShowModal] = useState<boolean>(false);
   const [loadLike, setLoadLike] = useState<boolean>(false);
   const queryClient = useQueryClient();
 
-  const currentUserLiked =
-    (session && likes?.some((like) => like.userId === user?.id)) || false;
+  // const currentUserLiked =
+  //   (session && likes?.some((like) => like.userId === session.user?.id)) || false;
 
   // console.log("likes:",props.likes);
 
@@ -55,7 +59,7 @@ export default function CommentCard({
   const likelisting = async ({ commentId }: LikeParams) => {
     setLoadLike(true);
     try {
-      await axios.listing("/api/comments/addLike", { commentId });
+      await axios.post("/api/comments/addLike", { commentId });
       queryClient.invalidateQueries(["listing", listingId]);
       //return response?.data;
     } catch (error) {
@@ -125,23 +129,34 @@ export default function CommentCard({
         <div className="mb-9 mt-9 text-gray-500">{body}</div>
         <div>
           <div className="flex items-center justify-between">
-            <div>
+            <div className="flex items-center gap-3">
               {loadLike ? (
-                <i className="fa-solid fa-spinner text-red-600"></i>
+                <LoaderIcon className="h-6 w-6" />
               ) : (
                 // <HeartIcon fill={currentUserLiked} onClick={clickHeart} />
-                <span onClick={clickHeart}>HeartIcon</span>
+                <button
+                  className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100"
+                  onClick={clickHeart}
+                >
+                  <AiFillLike size={24} />
+                </button>
               )}
-              <span className="ml-1 text-gray-400">{likes.length}</span>
+              <span className="text-gray-400">{likes.length}</span>
             </div>
             {userId === currentUserId && (
               <div className="flex gap-2.5">
-                <div>
-                  <span onClick={openEditModal}>EditIcon</span>
-                </div>
-                <div>
-                  <span onClick={openDeleteModal}>DeleteIcon</span>
-                </div>
+                <button
+                  className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100"
+                  onClick={openEditModal}
+                >
+                  <AiFillEdit size={24} />
+                </button>
+                <button
+                  className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100"
+                  onClick={openDeleteModal}
+                >
+                  <AiFillDelete size={24} />
+                </button>
               </div>
             )}
           </div>
@@ -160,7 +175,7 @@ export default function CommentCard({
       )}
       {showEditModal && (
         <CommentModal
-          modalTitle="Edit listing"
+          modalTitle="Edit Comment"
           closeModal={() => setEditShowModal(false)}
           footer={false}
           size={ModalSize.medium}

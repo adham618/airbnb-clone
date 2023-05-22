@@ -21,6 +21,7 @@ type CreateCommentFormProps = {
   listingId: string;
 };
 
+import { useRouter } from "next/navigation";
 import * as React from "react";
 
 import clsxm from "@/lib/clsxm";
@@ -30,6 +31,7 @@ export default function CreateCommentForm({
 }: CreateCommentFormProps) {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const {
     register,
@@ -65,6 +67,7 @@ export default function CreateCommentForm({
   const onSubmit = async (data: FormData) => {
     toast.loading("Creating a comment", { id: "comment-toast" });
     mutate(data);
+    router.refresh();
   };
 
   return (

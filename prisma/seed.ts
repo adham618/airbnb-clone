@@ -18,12 +18,12 @@ const fakerListing = () => ({
     "Skiing",
     "Castles",
   ]),
-  roomCount: faker.number.int({ min: 1, max: 10 }),
-  bathroomCount: faker.number.int({ min: 1, max: 10 }),
-  guestCount: faker.number.int({ min: 1, max: 10 }),
+  roomCount: faker.number.int({ min: 1, max: 5 }),
+  bathroomCount: faker.number.int({ min: 1, max: 3 }),
+  guestCount: faker.number.int({ min: 1, max: 3 }),
   location: faker.location.countryCode("alpha-2"),
   price: faker.number.int({ min: 100, max: 500 }),
-  userId: "646287e4f32a55c0d9f3efcd",
+  userId: "646a9ee0f044d6b8f2074126",
 });
 
 async function main() {

@@ -8,6 +8,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as z from "zod";
 
+import clsxm from "@/lib/clsxm";
+
 type EditPostFormProps = {
   commentId: string;
   listingId: string;
@@ -75,7 +77,12 @@ export default function EditCommentForm({
         placeholder="What's on your mind..."
         rows={4}
         id="post_box"
-        className="relative mb-2 mt-1 w-full rounded border bg-white px-3 py-3 text-sm placeholder-primary/70 outline-none focus:outline-none"
+        className={clsxm(
+          "relative mt-1 min-h-[100px] w-full rounded border-2 bg-white px-3 py-3 text-sm shadow-md outline-none focus:outline-none",
+          errors.body
+            ? "border-rose-500 focus:border-rose-500"
+            : "border-black focus:border-black"
+        )}
         {...register("body")}
       />
       <p className="text-red-500">{errors.body?.message}</p>
@@ -90,6 +97,7 @@ export default function EditCommentForm({
         <button
           className="mb-1 mr-1 rounded bg-emerald-500 px-4 py-2 text-sm font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none active:bg-emerald-600"
           type="submit"
+          disabled={Object.keys(errors).length > 0}
         >
           {/* {saveBtnText} */}
           Save edits
