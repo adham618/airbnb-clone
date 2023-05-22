@@ -24,7 +24,6 @@ type CommentCardProps = {
   likes: { id: string; commentId: string; userId: string }[];
   userId: string;
   currentUserId: string;
-  listingId: string;
   commentId: string;
 };
 
@@ -37,7 +36,6 @@ export default function CommentCard({
   likes,
   userId,
   currentUserId,
-  listingId,
   commentId,
 }: CommentCardProps) {
   const router = useRouter();

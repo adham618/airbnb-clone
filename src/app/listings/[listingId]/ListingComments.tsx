@@ -23,7 +23,6 @@ export default function ListingComments({
       {comments.map((comment: any) => (
         <CommentCard
           key={comment.id}
-          listingId={listingId}
           name={comment.user.name || ""}
           profilePic={comment.user.image || ""}
           likes={comment.likes}
