@@ -1,12 +1,11 @@
 "use client";
 
-import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as React from "react";
-import toast, { LoaderIcon } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { AiFillDelete, AiFillEdit, AiFillLike } from "react-icons/ai";
 
 import EditCommentForm from "@/components/Comments/EditCommentForm";
@@ -44,25 +43,21 @@ export default function CommentCard({
   const router = useRouter();
   const [showDeleteModal, setDeleteShowModal] = useState<boolean>(false);
   const [showEditModal, setEditShowModal] = useState<boolean>(false);
-  const [loadLike, setLoadLike] = useState<boolean>(false);
-  const queryClient = useQueryClient();
+  const likelisting = React.useCallback(
+    (commentId: string) => {
+      axios
+        .post("/api/comments/addLike", { commentId })
+        .then(() => {
+          router.refresh();
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.log(error);
+        });
+    },
 
-  type LikeParams = {
-    commentId: string;
-  };
-
-  const likelisting = async ({ commentId }: LikeParams) => {
-    setLoadLike(true);
-    try {
-      await axios.post("/api/comments/addLike", { commentId });
-      queryClient.invalidateQueries(["listing", listingId]);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    }
-    setLoadLike(false);
-    router.refresh();
-  };
+    [router]
+  );
   const mutate = React.useCallback(
     (commentId: string) => {
       axios
@@ -87,7 +82,7 @@ export default function CommentCard({
     [router]
   );
   const clickHeart = () => {
-    likelisting({ commentId });
+    likelisting(commentId);
   };
 
   const openEditModal = () => {
@@ -125,20 +120,16 @@ export default function CommentCard({
         <div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              {loadLike ? (
-                <LoaderIcon className="h-6 w-6" />
-              ) : (
-                <button
-                  className={`${
-                    likes?.some((like) => like.userId === currentUserId)
-                      ? "text-red-500"
-                      : "text-gray-500"
-                  } flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100`}
-                  onClick={clickHeart}
-                >
-                  <AiFillLike size={24} />
-                </button>
-              )}
+              <button
+                className={`${
+                  likes?.some((like) => like.userId === currentUserId)
+                    ? "text-red-500"
+                    : "text-gray-500"
+                } flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100`}
+                onClick={clickHeart}
+              >
+                <AiFillLike size={24} />
+              </button>
               <span className="text-gray-400">{likes.length}</span>
             </div>
             {userId === currentUserId && (
