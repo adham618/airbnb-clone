@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -63,31 +63,29 @@ export default function CommentCard({
     setLoadLike(false);
     router.refresh();
   };
-
-  const { mutate } = useMutation(
-    async (commentId: string) =>
-      await axios.delete("/api/comments/deleteComment", {
-        params: { commentId },
-      }),
-    {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onError: (error: any) => {
-        // eslint-disable-next-line no-console
-        console.log(error);
-        toast.error(error?.response?.data?.error || "Something went wrong", {
-          id: "delete-comment-toast",
+  const mutate = React.useCallback(
+    (commentId: string) => {
+      axios
+        .delete("/api/comments/deleteComment", {
+          params: { commentId },
+        })
+        .then(() => {
+          toast.success("Comment has been Deleted 🔥", {
+            id: "delete-comment-toast",
+          });
+          router.refresh();
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.error || "Something went wrong", {
+            id: "delete-comment-toast",
+          });
+        })
+        .finally(() => {
+          setDeleteShowModal(false);
         });
-      },
-      onSuccess: () => {
-        toast.success("Comment has been Deleted 🔥", {
-          id: "delete-comment-toast",
-        });
-        queryClient.invalidateQueries(["listing", listingId]);
-        router.refresh();
-      },
-    }
+    },
+    [router]
   );
-
   const clickHeart = () => {
     likelisting({ commentId });
   };
@@ -181,7 +179,6 @@ export default function CommentCard({
           size={ModalSize.medium}
         >
           <EditCommentForm
-            listingId={listingId}
             commentId={commentId}
             body={body}
             closeModal={() => setEditShowModal(false)}

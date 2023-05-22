@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
@@ -30,7 +29,6 @@ export default function CreateCommentForm({
   listingId,
 }: CreateCommentFormProps) {
   const { data: session } = useSession();
-  const queryClient = useQueryClient();
 
   const {
     register,
@@ -40,28 +38,27 @@ export default function CreateCommentForm({
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
-
-  const { mutate } = useMutation(
-    async (data: FormData) =>
-      await axios.post("/api/comments/addComment", { ...data, listingId }),
-    {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onError: (error: any) => {
-        // eslint-disable-next-line no-console
-        console.log(error);
-        toast.error(error?.response?.data?.error || "Something went wrong", {
-          id: "comment-toast",
-        });
-      },
-      onSuccess: () => {
-        toast.success("Comment has been created 🔥", { id: "comment-toast" });
-        queryClient.invalidateQueries(["post", listingId]);
-        reset();
-        router.refresh();
-      },
-    }
-  );
   const router = useRouter();
+  const mutate = React.useCallback(
+    (data: FormData) => {
+      axios
+        .post("/api/comments/addComment", { ...data, listingId })
+        .then(() => {
+          toast.success("Comment has been created 🔥", {
+            id: "comment-toast",
+          });
+          reset();
+          router.refresh();
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.error || "Something went wrong", {
+            id: "comment-toast",
+          });
+        });
+    },
+
+    [listingId, reset, router]
+  );
   const onSubmit = async (data: FormData) => {
     toast.loading("Creating a comment", { id: "comment-toast" });
     mutate(data);

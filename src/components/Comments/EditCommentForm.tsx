@@ -1,8 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -12,7 +12,6 @@ import clsxm from "@/lib/clsxm";
 
 type EditPostFormProps = {
   commentId: string;
-  listingId: string;
   body: string;
   closeModal: () => void;
 };
@@ -29,9 +28,8 @@ export default function EditCommentForm({
   commentId,
   body,
   closeModal,
-  listingId,
 }: EditPostFormProps) {
-  const queryClient = useQueryClient();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -43,30 +41,25 @@ export default function EditCommentForm({
     },
     resolver: zodResolver(schema),
   });
-
-  const { mutate } = useMutation(
-    async (data: FormData) =>
-      await axios.put("/api/comments/updateComment", { ...data, commentId }),
-    {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      onError: (error: any) => {
-        // eslint-disable-next-line no-console
-        console.log(error);
-        toast.error(error?.response?.data?.error || "Something went wrong", {
-          id: "comment-toast",
+  const mutate = React.useCallback(
+    (data: FormData) => {
+      axios
+        .put("/api/comments/updateComment", { ...data, commentId })
+        .then(() => {
+          toast.success("Comment has been updated 🔥", { id: "comment-toast" });
+          reset();
+          closeModal();
+          router.refresh();
+        })
+        .catch((error) => {
+          toast.error(error?.response?.data?.error || "Something went wrong", {
+            id: "comment-toast",
+          });
         });
-      },
-      onSuccess: (data) => {
-        toast.success("Comment has been updated 🔥", { id: "comment-toast" });
-        queryClient.invalidateQueries(["post", listingId]);
-        reset();
-        closeModal();
-        // eslint-disable-next-line no-console
-        console.log(data.data);
-      },
-    }
-  );
+    },
 
+    [closeModal, commentId, reset, router]
+  );
   const onSubmit = async (data: FormData) => {
     toast.loading("Editing comment", { id: "comment-toast" });
     mutate(data);
