@@ -52,12 +52,10 @@ export default function EditCommentForm({
       onError: (error: any) => {
         // eslint-disable-next-line no-console
         console.log(error);
-        toast.error(error?.response?.data?.error || "Something went wrong", {
-          id: "comment-toast",
-        });
+        toast.error(error?.response?.data?.error || "Something went wrong");
       },
       onSuccess: (data) => {
-        toast.success("Comment has been updated 🔥", { id: "comment-toast" });
+        toast.success("Comment has been updated 🔥");
         queryClient.invalidateQueries(["post", listingId]);
         reset();
         closeModal();
@@ -68,7 +66,7 @@ export default function EditCommentForm({
   );
 
   const onSubmit = async (data: FormData) => {
-    toast.loading("Editing comment", { id: "comment-toast" });
+    toast.loading("Editing comment");
     mutate(data);
   };
   return (
