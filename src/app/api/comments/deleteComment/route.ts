@@ -13,14 +13,16 @@ export async function DELETE(req: Request) {
 
   try {
     const { commentId } = await req.json();
-
     if (!commentId || typeof commentId !== "string") {
       throw new Error("Invalid ID");
     }
     const comment = await prisma.comment.findUnique({
-      where: { id: commentId as string },
-      select: { userId: true },
+      where: { id: commentId },
+      select: {
+        userId: true,
+      },
     });
+
     if (!comment) {
       return NextResponse.json({ message: "Post not found" }, { status: 404 });
     }
@@ -28,16 +30,24 @@ export async function DELETE(req: Request) {
       return NextResponse.json({ message: "Forbidden" }, { status: 403 });
     }
 
-    const result = await prisma.comment.delete({
+    // const result = await prisma.comment.delete({
+    //   where: {
+    //     id: commentId,
+    //   },
+    // });
+
+    const result = await prisma.comment.update({
       where: {
-        id: commentId as string,
+        id: commentId,
+      },
+      data: {
+        body: "[deleted]",
       },
     });
 
     return NextResponse.json(result);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
-    // console.log(err);
     return NextResponse.json({ error: error.message }, { status: 403 });
   }
 }

@@ -31,7 +31,6 @@ export default function CreateCommentForm({
 }: CreateCommentFormProps) {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
-  const router = useRouter();
 
   const {
     register,
@@ -54,20 +53,19 @@ export default function CreateCommentForm({
           id: "comment-toast",
         });
       },
-      onSuccess: (data) => {
+      onSuccess: () => {
         toast.success("Comment has been created 🔥", { id: "comment-toast" });
         queryClient.invalidateQueries(["post", listingId]);
         reset();
-        // eslint-disable-next-line no-console
-        console.log(data.data);
+        router.refresh();
       },
     }
   );
-
+  const router = useRouter();
   const onSubmit = async (data: FormData) => {
     toast.loading("Creating a comment", { id: "comment-toast" });
     mutate(data);
-    router.refresh();
+    router.push(`/listings/${listingId}`);
   };
 
   return (

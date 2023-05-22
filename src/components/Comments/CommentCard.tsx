@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as React from "react";
 import toast, { LoaderIcon } from "react-hot-toast";
@@ -40,17 +41,11 @@ export default function CommentCard({
   listingId,
   commentId,
 }: CommentCardProps) {
-  // const { data: session } = useSession();
-
+  const router = useRouter();
   const [showDeleteModal, setDeleteShowModal] = useState<boolean>(false);
   const [showEditModal, setEditShowModal] = useState<boolean>(false);
   const [loadLike, setLoadLike] = useState<boolean>(false);
   const queryClient = useQueryClient();
-
-  // const currentUserLiked =
-  //   (session && likes?.some((like) => like.userId === session.user?.id)) || false;
-
-  // console.log("likes:",props.likes);
 
   type LikeParams = {
     commentId: string;
@@ -61,12 +56,12 @@ export default function CommentCard({
     try {
       await axios.post("/api/comments/addLike", { commentId });
       queryClient.invalidateQueries(["listing", listingId]);
-      //return response?.data;
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
     }
     setLoadLike(false);
+    router.refresh();
   };
 
   const { mutate } = useMutation(
@@ -87,8 +82,8 @@ export default function CommentCard({
         toast.success("Comment has been Deleted 🔥", {
           id: "delete-comment-toast",
         });
-        queryClient.invalidateQueries(["listing", listingId]);
-        // console.log(data.data);
+        // queryClient.invalidateQueries(["listing", listingId]);
+        router.refresh();
       },
     }
   );
@@ -104,7 +99,6 @@ export default function CommentCard({
   const openDeleteModal = () => {
     setDeleteShowModal(true);
   };
-
   return (
     <>
       <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg bg-white p-4 shadow-lg">
@@ -121,8 +115,11 @@ export default function CommentCard({
               {capitalizeWord(name)}
             </div>
             <div className="text-gray-400">
-              {formatDate(createdAt)}{" "}
-              {createdAt != updatedAt && <i>(edited)</i>}
+              {formatDate(updatedAt || createdAt)}
+              {updatedAt && " (edited)"}
+              {/* {formatDate(createdAt) !== formatDate(updatedAt) && (
+                <i>(edited)</i>
+              )} */}
             </div>
           </div>
         </div>
@@ -133,9 +130,12 @@ export default function CommentCard({
               {loadLike ? (
                 <LoaderIcon className="h-6 w-6" />
               ) : (
-                // <HeartIcon fill={currentUserLiked} onClick={clickHeart} />
                 <button
-                  className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100"
+                  className={`${
+                    likes?.some((like) => like.userId === currentUserId)
+                      ? "text-red-500"
+                      : "text-gray-500"
+                  } flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100`}
                   onClick={clickHeart}
                 >
                   <AiFillLike size={24} />

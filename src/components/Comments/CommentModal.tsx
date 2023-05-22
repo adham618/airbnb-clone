@@ -29,7 +29,7 @@ export default function CommentModal({
 }: ModalProps) {
   return (
     <>
-      <div className="fixed inset-0 z-40 bg-black opacity-25"/>
+      <div className="fixed inset-0 z-40 bg-black opacity-25" />
       <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden outline-none focus:outline-none">
         <div
           className={`relative mx-auto my-6 w-full ${
@@ -58,10 +58,6 @@ export default function CommentModal({
             </div>
             {/*body*/}
             <div className="relative flex-auto p-6">{children}</div>
-            {/* {!footer && (
-              <div className="border-t border-solid p-6" />
-            )} */}
-            {/*footer*/}
             {footer && (
               <div className="flex items-center justify-end rounded-b border-t border-solid border-primary/60 p-6">
                 <button
