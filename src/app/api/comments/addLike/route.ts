@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prismadb";
 
 import getCurrentUser from "@/actions/getCurrentUser";
 
-export default async function POST(req: Request) {
+export async function POST(req: Request) {
   const currentUser = await getCurrentUser();
 
   if (!currentUser) {
