@@ -82,7 +82,7 @@ export default function CommentCard({
         toast.success("Comment has been Deleted 🔥", {
           id: "delete-comment-toast",
         });
-        // queryClient.invalidateQueries(["listing", listingId]);
+        queryClient.invalidateQueries(["listing", listingId]);
         router.refresh();
       },
     }
