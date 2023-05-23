@@ -62,7 +62,6 @@ export default function CreateCommentForm({
   const onSubmit = async (data: FormData) => {
     toast.loading("Creating a comment", { id: "comment-toast" });
     mutate(data);
-    router.push(`/listings/${listingId}`);
   };
 
   return (
