@@ -61,7 +61,7 @@ export default function CommentCard({
   const onDelete = React.useCallback(
     async (commentId: string) => {
       axios
-        .delete("/api/comments/deleteComment", { params: { commentId } })
+        .delete(`/api/comments/${commentId}`)
         .then(() => {
           toast.success("Comment Deleted 🔥", {
             id: "delete-comment-toast",
