@@ -33,6 +33,7 @@ export default function ListingComments({
           userId={comment.user?.id}
           currentUserId={currentUser?.id || ""}
           commentId={comment.id}
+          listingId={listingId}
         />
       ))}
       {/* {isLoading && (

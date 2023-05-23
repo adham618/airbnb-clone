@@ -25,6 +25,7 @@ type CommentCardProps = {
   userId: string;
   currentUserId: string;
   commentId: string;
+  listingId: string;
 };
 
 export default function CommentCard({
@@ -37,6 +38,7 @@ export default function CommentCard({
   userId,
   currentUserId,
   commentId,
+  listingId,
 }: CommentCardProps) {
   const router = useRouter();
   const [showDeleteModal, setDeleteShowModal] = useState<boolean>(false);
@@ -56,14 +58,12 @@ export default function CommentCard({
 
     [router]
   );
-  const mutate = React.useCallback(
-    (commentId: string) => {
+  const onDelete = React.useCallback(
+    async (commentId: string) => {
       axios
-        .delete("/api/comments/deleteComment", {
-          params: { commentId },
-        })
+        .delete("/api/comments/deleteComment", { params: { commentId } })
         .then(() => {
-          toast.success("Comment has been Deleted 🔥", {
+          toast.success("Comment Deleted 🔥", {
             id: "delete-comment-toast",
           });
           router.refresh();
@@ -72,9 +72,6 @@ export default function CommentCard({
           toast.error(error?.response?.data?.error || "Something went wrong", {
             id: "delete-comment-toast",
           });
-        })
-        .finally(() => {
-          setDeleteShowModal(false);
         });
     },
     [router]
@@ -153,7 +150,7 @@ export default function CommentCard({
         <CommentModal
           modalTitle="Delete listing"
           closeModal={() => setDeleteShowModal(false)}
-          saveFunction={() => mutate(commentId)}
+          saveFunction={() => onDelete(commentId)}
           footer={true}
           size={ModalSize.small}
         >

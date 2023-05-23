@@ -10,19 +10,13 @@ export async function DELETE(req: Request) {
   if (!currentUser) {
     return NextResponse.error();
   }
+  const { commentId } = await req.json();
 
   try {
-    const { commentId } = await req.json();
-    if (!commentId || typeof commentId !== "string") {
-      throw new Error("Invalid ID");
-    }
     const comment = await prisma.comment.findUnique({
-      where: { id: commentId },
-      select: {
-        userId: true,
-      },
+      where: { id: commentId as string },
+      select: { userId: true },
     });
-
     if (!comment) {
       return NextResponse.json({ message: "Post not found" }, { status: 404 });
     }
@@ -30,24 +24,15 @@ export async function DELETE(req: Request) {
       return NextResponse.json({ message: "Forbidden" }, { status: 403 });
     }
 
-    // const result = await prisma.comment.delete({
-    //   where: {
-    //     id: commentId,
-    //   },
-    // });
-
-    const result = await prisma.comment.update({
+    const result = await prisma.comment.delete({
       where: {
-        id: commentId,
-      },
-      data: {
-        body: "[deleted]",
+        id: commentId as string,
       },
     });
 
     return NextResponse.json(result);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 403 });
+  } catch (err: any) {
+    return NextResponse.json({ error: err.message }, { status: 403 });
   }
 }

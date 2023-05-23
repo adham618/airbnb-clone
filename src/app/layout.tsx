@@ -17,8 +17,9 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.name,
-  generator: `Next.js`,
   viewport: "width=device-width, initial-scale=1.0",
+  robots: "index, follow",
+  metadataBase: new URL(siteConfig.url),
   keywords: [
     "Next.js",
     "React",
@@ -73,8 +74,6 @@ export const metadata: Metadata = {
     "msapplication-TileImage": "/favicon/mstile-150x150.png",
     "msapplication-config": "/favicon/browserconfig.xml",
   },
-  robots: "index, follow",
-  metadataBase: new URL(siteConfig.url),
   // verification: {
   //   google: "1234567890",
   //   yandex: "1234567890",
