@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { Nunito } from "next/font/google";
+import { Suspense } from "react";
 
 import "../styles/globals.css";
 
@@ -91,7 +92,9 @@ export default async function RootLayout({
     <html lang="en">
       <head />
       <body className={nunito.className}>
-        <Providers currentUser={currentUser}>{children}</Providers>
+        <Suspense>
+          <Providers currentUser={currentUser}>{children}</Providers>
+        </Suspense>
       </body>
     </html>
   );

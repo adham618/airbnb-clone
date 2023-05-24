@@ -21,7 +21,7 @@ type ProvidersProps = {
   currentUser: SafeUser | null;
 };
 
-function Providers({ children, currentUser }: ProvidersProps) {
+export default function Providers({ children, currentUser }: ProvidersProps) {
   const [client] = React.useState(
     new QueryClient({ defaultOptions: { queries: { staleTime: 5000 } } })
   );
@@ -62,5 +62,3 @@ function Providers({ children, currentUser }: ProvidersProps) {
     </>
   );
 }
-
-export default Providers;
