@@ -1,5 +1,6 @@
 "use client";
 
+import { Like } from "@prisma/client";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -21,7 +22,7 @@ type CommentCardProps = {
   createdAt: string;
   updatedAt: string;
   body: string;
-  likes: { id: string; commentId: string; userId: string }[];
+  likes: Like[];
   userId: string;
   currentUserId: string;
   commentId: string;
@@ -102,9 +103,6 @@ export default function CommentCard({
             <div className="text-gray-400">
               {formatDate(updatedAt || createdAt)}
               {formatDate(updatedAt) !== formatDate(createdAt) && " (edited)"}
-              {/* {formatDate(createdAt) !== formatDate(updatedAt) && (
-                <i>(edited)</i>
-              )} */}
             </div>
           </div>
         </div>

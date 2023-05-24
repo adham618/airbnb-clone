@@ -33,6 +33,20 @@ export default async function getListingById(params: IParams) {
     return {
       ...listing,
       createdAt: listing.createdAt.toString(),
+      comments: listing.comments.map((comment) => ({
+        ...comment,
+        createdAt: comment.createdAt.toString(),
+        updatedAt: comment.updatedAt.toString(),
+        user: {
+          ...listing.user,
+          createdAt: listing.user.createdAt.toString(),
+          updatedAt: listing.user.updatedAt.toString(),
+          emailVerified: listing.user.emailVerified?.toString() || null,
+        },
+        likes: comment.likes.map((like) => ({
+          ...like,
+        })),
+      })),
       user: {
         ...listing.user,
         createdAt: listing.user.createdAt.toString(),

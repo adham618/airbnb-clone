@@ -5,12 +5,12 @@ import * as React from "react";
 import CommentCard from "@/components/Comments/CommentCard";
 import CreateCommentForm from "@/components/Comments/CreateCommentForm";
 
-import { SafeUser } from "@/types";
+import { SafeComment, SafeUser } from "@/types";
 
 type ListingCommentsProps = {
   listingId: string;
   currentUser?: SafeUser | null;
-  comments: any;
+  comments: SafeComment[];
 };
 export default function ListingComments({
   listingId,
@@ -20,20 +20,25 @@ export default function ListingComments({
   return (
     <div className="mt-8">
       <CreateCommentForm listingId={listingId} />
-      {comments.map((comment: any) => (
-        <CommentCard
-          key={comment.id}
-          name={comment.user.name || ""}
-          profilePic={comment.user.image || ""}
-          likes={comment.likes}
-          body={comment.body || ""}
-          createdAt={comment.createdAt}
-          updatedAt={comment.updatedAt}
-          userId={comment.user?.id}
-          currentUserId={currentUser?.id || ""}
-          commentId={comment.id}
-        />
-      ))}
+      {comments ? (
+        comments.map((comment) => (
+          <CommentCard
+            key={comment.id}
+            name={comment.user?.name || ""}
+            profilePic={comment.user?.image || ""}
+            likes={comment?.likes || []}
+            body={comment.body || ""}
+            createdAt={comment.createdAt}
+            updatedAt={comment.updatedAt}
+            userId={comment.user?.id || ""}
+            currentUserId={currentUser?.id || ""}
+            commentId={comment.id}
+          />
+        ))
+      ) : (
+        <div className="text-center">No comments yet</div>
+      )}
+
       {/* {isLoading && (
         <div className="flex justify-center">
           <BeatLoader color="#FF385C" />

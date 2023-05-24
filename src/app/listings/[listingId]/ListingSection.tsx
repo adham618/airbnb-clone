@@ -136,7 +136,7 @@ export default function ListingSection({
         </div>
         <ListingComments
           listingId={listing.id}
-          comments={listing.comments}
+          comments={listing.comments || []}
           currentUser={currentUser}
         />
       </div>
