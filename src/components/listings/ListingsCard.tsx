@@ -3,6 +3,7 @@
 import { format } from "date-fns";
 import Link from "next/link";
 import * as React from "react";
+import { Suspense } from "react";
 
 import useCountries from "@/hooks/useCountries";
 
@@ -62,14 +63,14 @@ export default function ListingsCard({
   }, [reservaion]);
 
   return (
-    <div className="group col-span-1">
-      <div className="flex w-full flex-col gap-2">
+    <div className="group col-span-1 flex w-full flex-col gap-2">
+      <div className="relative flex w-full overflow-hidden rounded-xl">
         <Link
           href={`/listings/${data.id}`}
-          className="relative aspect-square w-full overflow-hidden rounded-xl"
+          className="flex aspect-square w-full overflow-hidden rounded-xl"
           aria-label="View Listing"
         >
-          <React.Suspense fallback={<Skeleton className="h-full w-full" />}>
+          <Suspense fallback={<Skeleton className="h-full w-full" />}>
             <BlurImage
               className="h-full w-full cursor-pointer object-cover transition duration-300 group-hover:scale-110"
               src={data.image}
@@ -77,31 +78,30 @@ export default function ListingsCard({
               sizes="100%"
               alt={data.title}
             />
-          </React.Suspense>
-
-          <div className="absolute right-2 top-2">
-            <HeartButton listingId={data.id} currentUser={currentUser} />
-          </div>
+          </Suspense>
         </Link>
-        <div className="text-lg font-semibold">
-          {location?.region}, {location?.label}
+        <div className="absolute right-2 top-2">
+          <HeartButton listingId={data.id} currentUser={currentUser} />
         </div>
-        <div className="font-light text-neutral-500">
-          {resvervationDate || data.category}
-        </div>
-        <div className="flex items-center gap-1">
-          <div className="font-semibold">${price}</div>
-          {!reservaion && <div className="font-light">/ night</div>}
-        </div>
-        {onAction && actionLabel && (
-          <Button
-            onClick={handleCancel}
-            label={actionLabel}
-            small
-            disabled={disabled}
-          />
-        )}
       </div>
+      <div className="text-lg font-semibold">
+        {location?.region}, {location?.label}
+      </div>
+      <div className="font-light text-neutral-500">
+        {resvervationDate || data.category}
+      </div>
+      <div className="flex items-center gap-1">
+        <div className="font-semibold">${price}</div>
+        {!reservaion && <div className="font-light">/ night</div>}
+      </div>
+      {onAction && actionLabel && (
+        <Button
+          onClick={handleCancel}
+          label={actionLabel}
+          small
+          disabled={disabled}
+        />
+      )}
     </div>
   );
 }
