@@ -26,14 +26,12 @@ export default function ListingComments({
           name={comment.user.name || ""}
           profilePic={comment.user.image || ""}
           likes={comment.likes}
-          // likes={[]}
           body={comment.body || ""}
           createdAt={comment.createdAt}
           updatedAt={comment.updatedAt}
           userId={comment.user?.id}
           currentUserId={currentUser?.id || ""}
           commentId={comment.id}
-          listingId={listingId}
         />
       ))}
       {/* {isLoading && (

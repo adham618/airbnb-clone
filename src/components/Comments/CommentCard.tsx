@@ -25,9 +25,7 @@ type CommentCardProps = {
   userId: string;
   currentUserId: string;
   commentId: string;
-  listingId: string;
 };
-
 export default function CommentCard({
   name,
   profilePic,
@@ -38,7 +36,6 @@ export default function CommentCard({
   userId,
   currentUserId,
   commentId,
-  listingId,
 }: CommentCardProps) {
   const router = useRouter();
   const [showDeleteModal, setDeleteShowModal] = useState<boolean>(false);
@@ -104,7 +101,7 @@ export default function CommentCard({
             </div>
             <div className="text-gray-400">
               {formatDate(updatedAt || createdAt)}
-              {updatedAt && " (edited)"}
+              {formatDate(updatedAt) !== formatDate(createdAt) && " (edited)"}
               {/* {formatDate(createdAt) !== formatDate(updatedAt) && (
                 <i>(edited)</i>
               )} */}
