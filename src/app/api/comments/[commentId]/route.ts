@@ -24,6 +24,7 @@ export async function DELETE(req: Request, { params }: { params: IParams }) {
   const deleteComment = await prisma.comment.deleteMany({
     where: {
       id: commentId,
+      userId: currentUser.id,
     },
   });
 
