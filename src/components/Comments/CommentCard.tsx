@@ -27,6 +27,7 @@ type CommentCardProps = {
   userId: string;
   currentUserId: string;
   commentId: string;
+  listingId: string;
 };
 export default function CommentCard({
   name,
@@ -38,6 +39,7 @@ export default function CommentCard({
   userId,
   currentUserId,
   commentId,
+  listingId,
 }: CommentCardProps) {
   const router = useRouter();
   const [showDeleteModal, setDeleteShowModal] = useState<boolean>(false);
@@ -182,6 +184,7 @@ export default function CommentCard({
         >
           <ReplayCommentForm
             commentId={commentId}
+            listingId={listingId}
             closeModal={() => setReplayModal(false)}
           />
         </CommentModal>

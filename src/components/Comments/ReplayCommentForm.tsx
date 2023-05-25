@@ -12,6 +12,7 @@ import clsxm from "@/lib/clsxm";
 
 type ReplayCommentFormProps = {
   commentId: string;
+  listingId: string;
   closeModal: () => void;
 };
 
@@ -25,6 +26,7 @@ type FormData = z.infer<typeof schema>;
 
 export default function ReplayCommentForm({
   commentId,
+  listingId,
   closeModal,
 }: ReplayCommentFormProps) {
   const router = useRouter();
@@ -39,7 +41,7 @@ export default function ReplayCommentForm({
   const mutate = React.useCallback(
     (data: FormData) => {
       axios
-        .put("/api/comments/replayComment", { ...data, commentId })
+        .put("/api/comments/replayComment", { ...data, commentId, listingId })
         .then(() => {
           toast.success("Sucess 🔥", { id: "comment-toast" });
           reset();

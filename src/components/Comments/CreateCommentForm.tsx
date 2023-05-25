@@ -71,7 +71,6 @@ export default function CreateCommentForm({
       </label>
       <textarea
         placeholder="Comment here..."
-        rows={4}
         id="post_box"
         className={clsxm(
           "relative mt-1 min-h-[100px] w-full rounded border-2 bg-white px-3 py-3 text-sm shadow-md outline-none focus:outline-none",

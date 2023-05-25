@@ -11,16 +11,24 @@ export async function POST(req: Request) {
     return NextResponse.error();
   }
   try {
-    const { body, listingId } = await req.json();
+    const { body, commentId, listingId } = await req.json();
 
-    if (!listingId || typeof listingId !== "string") {
+    if (!commentId || typeof commentId !== "string") {
       throw new Error("Invalid ID");
     }
     const result = await prisma.comment.create({
       data: {
         body: body,
         userId: currentUser.id as string,
+        parentId: commentId,
         listingId: listingId,
+      },
+      include: {
+        Children: {
+          include: {
+            Children: true,
+          },
+        },
       },
     });
     return NextResponse.json(result);

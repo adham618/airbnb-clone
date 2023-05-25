@@ -35,6 +35,7 @@ export default function ListingComments({
                 userId={comment.userId || ""}
                 currentUserId={currentUser?.id || ""}
                 commentId={comment.id}
+                listingId={listingId}
               />
               <div className="ml-4">
                 {comment?.Children?.map((child) => (
@@ -49,6 +50,7 @@ export default function ListingComments({
                     userId={child.userId || ""}
                     currentUserId={currentUser?.id || ""}
                     commentId={child.id}
+                    listingId={listingId}
                   />
                 ))}
               </div>
@@ -65,6 +67,7 @@ export default function ListingComments({
               userId={comment.userId || ""}
               currentUserId={currentUser?.id || ""}
               commentId={comment.id}
+              listingId={listingId}
             />
           )
         )
