@@ -25,10 +25,11 @@ export type SafeUser = Omit<
 
 export type SafeComment = Omit<
   Comment,
-  "createdAt" | "updatedAt" | "likes" | "user"
+  "createdAt" | "updatedAt" | "likes" | "user" | "Children"
 > & {
   createdAt: string;
   updatedAt: string;
   user: SafeUser;
   likes?: Like[];
+  Children?: SafeComment[];
 };

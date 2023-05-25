@@ -10,6 +10,7 @@ import { AiFillDelete, AiFillEdit, AiFillLike } from "react-icons/ai";
 
 import Avater from "@/components/Avater";
 import EditCommentForm from "@/components/Comments/EditCommentForm";
+import ReplayCommentForm from "@/components/Comments/ReplayCommentForm";
 
 import capitalizeWord from "@/utils/capitalizeWord";
 import formatDate from "@/utils/formatDate";
@@ -41,6 +42,7 @@ export default function CommentCard({
   const router = useRouter();
   const [showDeleteModal, setDeleteShowModal] = useState<boolean>(false);
   const [showEditModal, setEditShowModal] = useState<boolean>(false);
+  const [showReplayModal, setReplayModal] = useState<boolean>(false);
   const likelisting = React.useCallback(
     (commentId: string) => {
       axios
@@ -85,9 +87,12 @@ export default function CommentCard({
   const openDeleteModal = () => {
     setDeleteShowModal(true);
   };
+  const openReplayModal = () => {
+    setReplayModal(true);
+  };
   return (
     <>
-      <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg bg-white p-4 shadow-lg">
+      <div className="relative mb-4 flex w-full min-w-0 flex-col break-words rounded-lg bg-white p-4 shadow hover:shadow-lg">
         <div className="flex items-center">
           <Avater src={profilePic} className="mr-3" />
           <div>
@@ -100,7 +105,7 @@ export default function CommentCard({
             </div>
           </div>
         </div>
-        <div className="mb-9 mt-9 text-gray-500">{body}</div>
+        <div className="my-1 ml-3 text-gray-500">{body}</div>
         <div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -116,22 +121,30 @@ export default function CommentCard({
               </button>
               <span className="text-gray-400">{likes.length}</span>
             </div>
-            {userId === currentUserId && (
-              <div className="flex gap-2.5">
-                <button
-                  className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100"
-                  onClick={openEditModal}
-                >
-                  <AiFillEdit size={24} />
-                </button>
-                <button
-                  className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100"
-                  onClick={openDeleteModal}
-                >
-                  <AiFillDelete size={24} />
-                </button>
-              </div>
-            )}
+            <div className="flex gap-2.5">
+              {userId === currentUserId && (
+                <>
+                  <button
+                    className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100"
+                    onClick={openEditModal}
+                  >
+                    <AiFillEdit size={24} />
+                  </button>
+                  <button
+                    className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100"
+                    onClick={openDeleteModal}
+                  >
+                    <AiFillDelete size={24} />
+                  </button>
+                </>
+              )}
+              <button
+                className="rounded-md border-2 border-primary px-4 py-1 text-primary transition hover:bg-slate-100"
+                onClick={openReplayModal}
+              >
+                Replay
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -157,6 +170,19 @@ export default function CommentCard({
             commentId={commentId}
             body={body}
             closeModal={() => setEditShowModal(false)}
+          />
+        </CommentModal>
+      )}
+      {showReplayModal && (
+        <CommentModal
+          modalTitle={`Replay to ${name}`}
+          closeModal={() => setReplayModal(false)}
+          footer={false}
+          size={ModalSize.medium}
+        >
+          <ReplayCommentForm
+            commentId={commentId}
+            closeModal={() => setReplayModal(false)}
           />
         </CommentModal>
       )}

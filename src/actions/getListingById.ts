@@ -18,6 +18,11 @@ export default async function getListingById(params: IParams) {
           include: {
             user: true,
             likes: true,
+            Children: {
+              include: {
+                Children: true,
+              },
+            },
           },
           orderBy: {
             createdAt: "desc",
@@ -43,6 +48,17 @@ export default async function getListingById(params: IParams) {
           updatedAt: comment.user.updatedAt.toString(),
           emailVerified: comment.user.emailVerified?.toString() || null,
         },
+        Children: comment.Children.map((child) => ({
+          ...child,
+          createdAt: child.createdAt.toString(),
+          updatedAt: child.updatedAt.toString(),
+          user: {
+            ...child.user,
+            createdAt: child.user.createdAt.toString(),
+            updatedAt: child.user.updatedAt.toString(),
+            emailVerified: child.user.emailVerified?.toString() || null,
+          },
+        })),
         likes: comment.likes.map((like) => ({
           ...like,
         })),

@@ -10,9 +10,8 @@ import * as z from "zod";
 
 import clsxm from "@/lib/clsxm";
 
-type EditPostFormProps = {
+type ReplayCommentFormProps = {
   commentId: string;
-  body: string;
   closeModal: () => void;
 };
 
@@ -24,11 +23,10 @@ const schema = z.object({
 });
 type FormData = z.infer<typeof schema>;
 
-export default function EditCommentForm({
+export default function ReplayCommentForm({
   commentId,
-  body,
   closeModal,
-}: EditPostFormProps) {
+}: ReplayCommentFormProps) {
   const router = useRouter();
   const {
     register,
@@ -36,17 +34,14 @@ export default function EditCommentForm({
     formState: { errors },
     reset,
   } = useForm<FormData>({
-    defaultValues: {
-      body: body,
-    },
     resolver: zodResolver(schema),
   });
   const mutate = React.useCallback(
     (data: FormData) => {
       axios
-        .put("/api/comments/updateComment", { ...data, commentId })
+        .put("/api/comments/replayComment", { ...data, commentId })
         .then(() => {
-          toast.success("Comment has been updated 🔥", { id: "comment-toast" });
+          toast.success("Sucess 🔥", { id: "comment-toast" });
           reset();
           closeModal();
           router.refresh();
@@ -91,7 +86,7 @@ export default function EditCommentForm({
           type="submit"
           disabled={Object.keys(errors).length > 0}
         >
-          Save edits
+          Submit
         </button>
       </div>
     </form>
