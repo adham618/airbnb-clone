@@ -24,13 +24,13 @@ export default function ListingComments({
         comments.map((comment) => (
           <CommentCard
             key={comment.id}
-            name={comment.user?.name || ""}
-            profilePic={comment.user?.image || ""}
+            name={currentUser?.name || ""}
+            profilePic={currentUser?.image || ""}
             likes={comment?.likes || []}
             body={comment.body || ""}
             createdAt={comment.createdAt}
             updatedAt={comment.updatedAt}
-            userId={comment.user?.id || ""}
+            userId={currentUser?.id || ""}
             currentUserId={currentUser?.id || ""}
             commentId={comment.id}
           />
