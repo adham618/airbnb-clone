@@ -2,13 +2,13 @@
 
 import { Like } from "@prisma/client";
 import axios from "axios";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import * as React from "react";
 import toast from "react-hot-toast";
 import { AiFillDelete, AiFillEdit, AiFillLike } from "react-icons/ai";
 
+import Avater from "@/components/Avater";
 import EditCommentForm from "@/components/Comments/EditCommentForm";
 
 import capitalizeWord from "@/utils/capitalizeWord";
@@ -89,13 +89,7 @@ export default function CommentCard({
     <>
       <div className="relative mb-6 flex w-full min-w-0 flex-col break-words rounded-lg bg-white p-4 shadow-lg">
         <div className="flex items-center">
-          <Image
-            alt="profile pic"
-            src={profilePic}
-            className="mr-3 h-10 w-10 rounded-full object-cover"
-            width={40}
-            height={40}
-          />
+          <Avater src={profilePic} className="mr-3" />
           <div>
             <div className="font-medium text-gray-700">
               {capitalizeWord(name)}
