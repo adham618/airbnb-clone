@@ -38,6 +38,7 @@ export async function DELETE(req: Request, { params }: { params: IParams }) {
     });
 
     return NextResponse.json(deleteComment);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 403 });
   }
