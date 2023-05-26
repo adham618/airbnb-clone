@@ -55,7 +55,7 @@ export default function ReplayCommentForm({
         });
     },
 
-    [closeModal, commentId, reset, router]
+    [closeModal, commentId, listingId, reset, router]
   );
   const onSubmit = async (data: FormData) => {
     toast.loading("Editing comment", { id: "comment-toast" });

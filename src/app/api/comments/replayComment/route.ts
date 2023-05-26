@@ -20,15 +20,15 @@ export async function POST(req: Request) {
       data: {
         body: body,
         userId: currentUser.id as string,
-        parentId: commentId,
+        // parentId: commentId,
         listingId: listingId,
       },
       include: {
-        Children: {
-          include: {
-            Children: true,
-          },
-        },
+        // Children: {
+        //   include: {
+        //     Children: true,
+        //   },
+        // },
       },
     });
     return NextResponse.json(result);

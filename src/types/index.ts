@@ -31,5 +31,5 @@ export type SafeComment = Omit<
   updatedAt: string;
   user: SafeUser;
   likes?: Like[];
-  Children?: SafeComment[];
+  // Children?: SafeComment[];
 };

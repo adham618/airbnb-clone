@@ -7,7 +7,7 @@ import getListingById from "@/actions/getListingById";
 import getReservations from "@/actions/getReservations";
 
 import ListingSection from "./ListingSection";
-import { siteConfig } from "../../../../siteConfig";
+import { siteConfig } from "../../../config/site";
 
 type Params = {
   params: { listingId: string };

@@ -109,9 +109,9 @@ model Comment {
   user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   listing  Listing   @relation(fields: [listingId], references: [id], onDelete: Cascade)
   likes    Like[]
-  parentId String?   @db.ObjectId
-  parent   Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  Children Comment[] @relation("CommentToComment")
+  // parentId String?   @db.ObjectId
+  // parent   Comment?  @relation("CommentToComment", fields: [parentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  // Children Comment[] @relation("CommentToComment")
 }
 
 model Like {

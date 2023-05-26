@@ -1,4 +1,7 @@
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
+
+import { authOptions } from "@/lib/auth";
 
 import EmptyState from "@/components/EmptyState";
 
@@ -23,6 +26,10 @@ export default async function Trips() {
         subTitle="You must be signed in to view this page."
       />
     );
+  }
+
+  if (!currentUser) {
+    redirect(authOptions?.pages?.signIn || "/login");
   }
 
   const reservations = await getReservations({ userId: currentUser.id });

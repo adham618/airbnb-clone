@@ -4,12 +4,19 @@ import { Suspense } from "react";
 
 import "../styles/globals.css";
 
+import clsxm from "@/lib/clsxm";
+
 import getCurrentUser from "@/actions/getCurrentUser";
 
 import Providers from "./providers";
-import { siteConfig } from "../../siteConfig";
+import { siteConfig } from "../config/site";
 
 const nunito = Nunito({ subsets: ["latin"] });
+
+// const fontHeading = localFont({
+//   src: "/fonts/CalSans-SemiBold.woff2",
+//   variable: "--font-heading",
+// });
 
 export const metadata: Metadata = {
   title: {
@@ -29,11 +36,11 @@ export const metadata: Metadata = {
   ],
   authors: [
     {
-      name: "Adham Tarek",
-      url: "https://adhamtarek.vercel.app",
+      name: siteConfig.creator.name,
+      url: siteConfig.creator.website,
     },
   ],
-  creator: "Adham Tarek",
+  creator: siteConfig.creator.name,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
@@ -59,7 +66,7 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
-    creator: "@test",
+    creator: siteConfig.creator.twitterUserName,
   },
   robots: {
     index: true,
@@ -101,7 +108,13 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className={nunito.className}>
+      <body
+        className={clsxm(
+          "min-h-screen",
+          nunito.className
+          // fontHeading.className
+        )}
+      >
         <Suspense>
           <Providers currentUser={currentUser}>{children}</Providers>
         </Suspense>
