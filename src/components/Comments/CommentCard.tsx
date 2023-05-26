@@ -1,5 +1,4 @@
 "use client";
-
 import { Like } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -7,6 +6,7 @@ import { useState } from "react";
 import * as React from "react";
 import toast from "react-hot-toast";
 import { AiFillDelete, AiFillEdit, AiFillLike } from "react-icons/ai";
+import TimeAgo from "timeago-react"; // var TimeAgo = require('timeago-react');
 
 import Avater from "@/components/Avater";
 import EditCommentForm from "@/components/Comments/EditCommentForm";
@@ -94,54 +94,59 @@ export default function CommentCard({
   };
   return (
     <>
-      <div className="relative mb-4 flex w-full min-w-0 flex-col break-words rounded-lg bg-white p-4 shadow hover:shadow-lg">
+      <div className="relative mb-4 flex w-full min-w-0 flex-col break-words rounded-lg bg-white p-2 shadow hover:shadow-lg sm:p-4">
         <div className="flex items-center">
-          <Avater src={profilePic} className="mr-3" />
+          <Avater src={profilePic} className="mr-2 w-10" />
           <div>
             <div className="font-medium text-gray-700">
               {capitalizeWord(name)}
             </div>
-            <div className="text-gray-400">
-              {formatDate(updatedAt || createdAt)}
+            <div className="text-sm text-gray-400">
+              {/* {formatDate(updatedAt || createdAt)} */}
+              <TimeAgo
+                datetime={updatedAt ? new Date(updatedAt) : new Date(createdAt)}
+              />
               {formatDate(updatedAt) !== formatDate(createdAt) && " (edited)"}
             </div>
           </div>
         </div>
-        <div className="my-1 ml-3 text-gray-500">{body}</div>
+        <p className="mb-0.5 ml-3 mt-2 text-gray-500">{body}</p>
         <div>
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1 sm:gap-3">
               <button
                 className={`${
                   likes?.some((like) => like.userId === currentUserId)
                     ? "text-red-500"
                     : "text-gray-500"
-                } flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100`}
+                } flex items-center justify-center rounded-full transition hover:bg-slate-100`}
                 onClick={clickHeart}
               >
-                <AiFillLike size={24} />
+                <AiFillLike className="sm:w-6" />
               </button>
-              <span className="text-gray-400">{likes.length}</span>
+              <span className="text-xs text-gray-400 sm:text-sm">
+                {likes.length}
+              </span>
             </div>
             <div className="flex gap-2.5">
               {userId === currentUserId && (
                 <>
                   <button
-                    className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100"
+                    className="flex items-center justify-center rounded-full transition hover:bg-slate-100"
                     onClick={openEditModal}
                   >
-                    <AiFillEdit size={24} />
+                    <AiFillEdit className="sm:w-6" />
                   </button>
                   <button
-                    className="flex h-10 w-10 items-center justify-center rounded-full transition hover:bg-slate-100"
+                    className="flex items-center justify-center rounded-full transition hover:bg-slate-100"
                     onClick={openDeleteModal}
                   >
-                    <AiFillDelete size={24} />
+                    <AiFillDelete className="sm:w-6" />
                   </button>
                 </>
               )}
               <button
-                className="rounded-md border-2 border-primary px-4 py-1 text-primary transition hover:bg-slate-100"
+                className="rounded-md border-2 border-primary px-4 py-1 text-sm text-primary transition hover:bg-slate-100 sm:text-base"
                 onClick={openReplayModal}
               >
                 Replay
