@@ -110,7 +110,9 @@ export default function CommentCard({
             </div>
           </div>
         </div>
-        <p className="mb-0.5 ml-3 mt-2 text-gray-500">{body}</p>
+        <p className="mb-0.5 ml-3 mt-2 text-sm text-gray-500 sm:text-base">
+          {body}
+        </p>
         <div>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1 sm:gap-3">
@@ -119,7 +121,7 @@ export default function CommentCard({
                   likes?.some((like) => like.userId === currentUserId)
                     ? "text-red-500"
                     : "text-gray-500"
-                } flex items-center justify-center rounded-full transition hover:bg-slate-100`}
+                } flex h-7 w-7 items-center justify-center rounded-full transition hover:bg-slate-100 sm:h-10 sm:w-10`}
                 onClick={clickHeart}
               >
                 <AiFillLike className="sm:w-6" />
@@ -132,13 +134,13 @@ export default function CommentCard({
               {userId === currentUserId && (
                 <>
                   <button
-                    className="flex items-center justify-center rounded-full transition hover:bg-slate-100"
+                    className="flex h-7 w-7 items-center justify-center rounded-full  transition hover:bg-slate-100 sm:h-10 sm:w-10"
                     onClick={openEditModal}
                   >
                     <AiFillEdit className="sm:w-6" />
                   </button>
                   <button
-                    className="flex items-center justify-center rounded-full transition hover:bg-slate-100"
+                    className="flex h-7 w-7 items-center justify-center  rounded-full transition hover:bg-slate-100 sm:h-10 sm:w-10"
                     onClick={openDeleteModal}
                   >
                     <AiFillDelete className="sm:w-6" />
