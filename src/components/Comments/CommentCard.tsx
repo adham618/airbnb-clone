@@ -115,35 +115,35 @@ export default function CommentCard({
         </p>
         <div>
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1 sm:gap-3">
+            <div className="flex items-center gap-1">
               <button
                 className={`${
                   likes?.some((like) => like.userId === currentUserId)
                     ? "text-red-500"
                     : "text-gray-500"
-                } flex h-7 w-7 items-center justify-center rounded-full transition hover:bg-slate-100 sm:h-10 sm:w-10`}
+                } flex h-7 w-7 items-center justify-center rounded-full transition hover:bg-slate-100 sm:h-9 sm:w-9`}
                 onClick={clickHeart}
               >
-                <AiFillLike className="sm:w-6" />
+                <AiFillLike className="sm:text-xl" />
               </button>
               <span className="text-xs text-gray-400 sm:text-sm">
-                {likes.length}
+                {likes?.length === 0 ? "" : likes?.length}
               </span>
             </div>
             <div className="flex gap-2.5">
               {userId === currentUserId && (
                 <>
                   <button
-                    className="flex h-7 w-7 items-center justify-center rounded-full  transition hover:bg-slate-100 sm:h-10 sm:w-10"
+                    className="flex h-7 w-7 items-center justify-center rounded-full  transition hover:bg-slate-100 sm:h-9 sm:w-9"
                     onClick={openEditModal}
                   >
-                    <AiFillEdit className="sm:w-6" />
+                    <AiFillEdit className="sm:text-xl" />
                   </button>
                   <button
-                    className="flex h-7 w-7 items-center justify-center  rounded-full transition hover:bg-slate-100 sm:h-10 sm:w-10"
+                    className="flex h-7 w-7 items-center justify-center  rounded-full transition hover:bg-slate-100 sm:h-9 sm:w-9"
                     onClick={openDeleteModal}
                   >
-                    <AiFillDelete className="sm:w-6" />
+                    <AiFillDelete className="sm:text-xl" />
                   </button>
                 </>
               )}
