@@ -66,7 +66,7 @@ export default function ListingsCard({
     <div className="group col-span-1 flex w-full flex-col gap-2">
       <div className="relative flex w-full overflow-hidden rounded-xl">
         <Link
-          href={`/listings/${data.id}`}
+          href={`/listings/${data.title.replace(/\s+/g, "-")}_${data.id}`}
           className="flex aspect-square w-full overflow-hidden rounded-xl"
           aria-label="View Listing"
         >
