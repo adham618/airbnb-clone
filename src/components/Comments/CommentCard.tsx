@@ -105,30 +105,6 @@ export default function CommentCard({
               {/* {formatDate(updatedAt || createdAt)} */}
               <TimeAgo
                 date={updatedAt ? new Date(updatedAt) : new Date(createdAt)}
-                formatter={(value, unit, suffix) => {
-                  if (unit === "second") {
-                    return "Just now";
-                  }
-                  if (unit === "minute") {
-                    return "1m ago";
-                  }
-                  if (unit === "hour") {
-                    return "1h ago";
-                  }
-                  if (unit === "day") {
-                    return "1d ago";
-                  }
-                  if (unit === "week") {
-                    return "1w";
-                  }
-                  if (unit === "month") {
-                    return "1m";
-                  }
-                  if (unit === "year") {
-                    return "1y ago";
-                  }
-                  return `${value} ${unit}${suffix}`;
-                }}
               />
               {formatDate(updatedAt) !== formatDate(createdAt) && " (edited)"}
             </div>
