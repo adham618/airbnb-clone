@@ -159,13 +159,13 @@ export default function CommentCard({
       </div>
       {showDeleteModal && (
         <CommentModal
-          modalTitle="Delete listing"
+          modalTitle="Delete Comment"
           closeModal={() => setDeleteShowModal(false)}
           saveFunction={() => onDelete(commentId)}
           footer={true}
           size={ModalSize.small}
         >
-          Are you sure you want to delete this listing?
+          Are you sure you want to delete this comment?
         </CommentModal>
       )}
       {showEditModal && (

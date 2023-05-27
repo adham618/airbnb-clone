@@ -61,14 +61,14 @@ export default function CommentModal({
             {footer && (
               <div className="flex items-center justify-end rounded-b border-t border-solid border-primary/60 p-6">
                 <button
-                  className="background-transparent mb-1 mr-1 px-6 py-2 text-sm font-bold uppercase text-red-500 outline-none transition-all duration-150 ease-linear focus:outline-none"
+                  className="rounded border-2 border-black px-6 py-2 text-sm font-bold uppercase outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none"
                   type="button"
                   onClick={() => closeModal()}
                 >
                   Close
                 </button>
                 <button
-                  className="mb-1 mr-1 rounded bg-emerald-500 px-4 py-2 text-sm font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none active:bg-emerald-600"
+                  className="rounded border border-primary bg-primary px-4 py-2 text-sm font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none active:bg-primary-hover"
                   type="button"
                   onClick={() => {
                     saveFunction != undefined && saveFunction();
