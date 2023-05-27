@@ -6,7 +6,7 @@ import { useState } from "react";
 import * as React from "react";
 import toast from "react-hot-toast";
 import { AiFillDelete, AiFillEdit, AiFillLike } from "react-icons/ai";
-import TimeAgo from "timeago-react"; // var TimeAgo = require('timeago-react');
+import TimeAgo from "react-timeago";
 
 import Avater from "@/components/Avater";
 import EditCommentForm from "@/components/Comments/EditCommentForm";
@@ -104,7 +104,31 @@ export default function CommentCard({
             <div className="text-sm text-gray-400">
               {/* {formatDate(updatedAt || createdAt)} */}
               <TimeAgo
-                datetime={updatedAt ? new Date(updatedAt) : new Date(createdAt)}
+                date={updatedAt ? new Date(updatedAt) : new Date(createdAt)}
+                formatter={(value, unit, suffix) => {
+                  if (unit === "second") {
+                    return "Just now";
+                  }
+                  if (unit === "minute") {
+                    return "1m ago";
+                  }
+                  if (unit === "hour") {
+                    return "1h ago";
+                  }
+                  if (unit === "day") {
+                    return "1d ago";
+                  }
+                  if (unit === "week") {
+                    return "1w";
+                  }
+                  if (unit === "month") {
+                    return "1m";
+                  }
+                  if (unit === "year") {
+                    return "1y ago";
+                  }
+                  return `${value} ${unit}${suffix}`;
+                }}
               />
               {formatDate(updatedAt) !== formatDate(createdAt) && " (edited)"}
             </div>
