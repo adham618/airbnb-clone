@@ -16,14 +16,21 @@ type Params = {
 // set dynamic metadata
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const listing = await getListingById(params);
-
+  const description =
+    listing?.description && listing?.description.length > 160
+      ? listing?.description.slice(0, 160) + "..."
+      : listing?.description;
+  const url = `${siteConfig.url}/listings/${listing?.title.replace(
+    /\s+/g,
+    "-"
+  )}_${listing?.id}`;
   return {
     title: listing?.title,
-    description: listing?.description.slice(0, 100) + "...",
+    description: description,
     openGraph: {
       title: listing?.title,
-      description: listing?.description.slice(0, 100) + "...",
-      url: `${siteConfig.url}/listings/${listing?.id}`,
+      description: description,
+      url: url,
       siteName: siteConfig.name,
       images: [
         {
@@ -36,7 +43,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     },
     twitter: {
       title: listing?.title,
-      description: listing?.description.slice(0, 100) + "...",
+      description: description,
       images: [listing?.image || ""],
     },
   };
