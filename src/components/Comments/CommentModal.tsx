@@ -57,9 +57,9 @@ export default function CommentModal({
               </button>
             </div>
             {/*body*/}
-            <div className="relative flex-auto p-6">{children}</div>
+            <div className="relative flex-auto p-3 px-6">{children}</div>
             {footer && (
-              <div className="flex items-center justify-end rounded-b border-t border-solid border-primary/60 p-6">
+              <div className="flex items-center justify-end gap-3 rounded-b border-t border-solid border-primary/60 p-4">
                 <button
                   className="rounded border-2 border-black px-6 py-2 text-sm font-bold uppercase outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none"
                   type="button"
