@@ -21,6 +21,7 @@ export default function header({ currentUser }: HeaderProps) {
           <Logo />
           <Search />
           <UserMenu currentUser={currentUser} />
+          {/* <ThemeToggle /> */}
         </div>
       </div>
       <Categories />

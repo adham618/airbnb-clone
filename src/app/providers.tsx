@@ -6,6 +6,8 @@ import { redirect, usePathname, useRouter } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 import React from "react";
 
+import { TailwindIndicator } from "@/lib/TailwindIndicator";
+
 import DismissableToast from "@/components/DismissableToast";
 import Header from "@/components/Layout/Header";
 import LoginModal from "@/components/modals/LoginModal";
@@ -57,6 +59,7 @@ export default function Providers({ children, currentUser }: ProvidersProps) {
             <DismissableToast />
           </SessionProvider>
           {/* <Footer /> */}
+          <TailwindIndicator />
         </>
       )}
     </>
